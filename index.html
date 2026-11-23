@@ -634,24 +634,36 @@ function renderExistingAccountLinks(){
     const owner=currentUser.uid;
     const profileRef=profileDoc(account.uid);
     const memberRef=memberDoc(owner,account.uid);
-    const [profile,member]=await Promise.all([getDoc(profileRef),getDoc(memberRef)]);
-    if(profile.exists()&&profile.data().ownerUid&&profile.data().ownerUid!==owner){
+    // A missing salaryProfiles document may return permission-denied to an Admin
+    // under the current rules: the Admin is neither the member nor the owner of
+    // a nonexistent resource. Treat this one case as unknown/missing; the
+    // Firestore create rule still authorizes (or rejects) the write.
+    let profile=null;
+    try{profile=await getDoc(profileRef)}catch(e){
+      if(e?.code!=='permission-denied')throw e;
+    }
+    const member=await getDoc(memberRef);
+    if(profile?.exists()&&profile.data().ownerUid&&profile.data().ownerUid!==owner){
       throw new Error('โปรไฟล์นี้ผูกกับ Admin คนละ UID หยุดเพื่อป้องกันการย้ายสิทธิ์ผิดบัญชี');
     }
-    if(profile.exists()&&profile.data().username&&normalizeUsername(profile.data().username)!==account.username){
+    if(profile?.exists()&&profile.data().username&&normalizeUsername(profile.data().username)!==account.username){
       throw new Error('โปรไฟล์ UID นี้มี username อื่นอยู่ กรุณาตรวจสอบบัญชี Authentication ก่อน');
     }
     if(member.exists()&&member.data().username&&normalizeUsername(member.data().username)!==account.username){
       throw new Error('UID นี้มีสมาชิกชื่ออื่นอยู่ใน workspaces กรุณาตรวจสอบก่อน');
     }
     const batch=writeBatch(db);
-    batch.set(profileRef,{ownerUid:owner,username:account.username,...(profile.exists()?{}:{createdAt:serverTimestamp()})},{merge:true});
+    // Existing salaryProfiles are immutable under the supplied Rules.
+    // Never write to an existing profile; create only if it was not readable.
+    if(!profile?.exists()){
+      batch.set(profileRef,{ownerUid:owner,username:account.username,createdAt:serverTimestamp()});
+    }
     batch.set(memberRef,{username:account.username,enabled:true,updatedAt:serverTimestamp(),...(member.exists()?{}:{addedAt:serverTimestamp()})},{merge:true});
     await batch.commit();
     usersMessage('เชื่อม '+account.username+' สำเร็จ • UID '+account.uid+' • ลองเข้าสู่ระบบสมาชิกอีกครั้ง');
     await showUsernameUsers();
     button.textContent='เชื่อมแล้ว';
-   }catch(err){usersMessage('เชื่อม '+account.username+' ไม่สำเร็จ: '+authMessage(err)+' หากเป็น permission-denied ต้องตรวจ Firestore Rules ไม่ควรเปิดสิทธิ์สาธารณะ',true)}
+   }catch(err){usersMessage('เชื่อม '+account.username+' ไม่สำเร็จ: '+authMessage(err)+' — หากโปรไฟล์ UID นี้มีอยู่ก่อนแล้วแต่สิทธิ์อ่านถูกปฏิเสธ จะไม่เขียนทับ ต้องตรวจเอกสาร salaryProfiles ใน Firebase Console',true)}
    finally{button.disabled=false}
   });
   line.append(info,button);list.append(line);
