@@ -204,6 +204,11 @@ body.workspace-loading main.wrap{pointer-events:none;opacity:.54}
 <div class="modal" id="users-modal" role="dialog" aria-modal="true" aria-labelledby="users-title"><div class="dialog workspace-panel">
 <h3 id="users-title">จัดการผู้ใช้</h3><p>Admin สร้างชื่อผู้ใช้และรหัสผ่านให้สมาชิกได้ สมาชิกไม่ต้องกรอกอีเมล และจะเข้าถึงข้อมูลเงินเดือนเดียวกันตามสิทธิ์</p>
 <div id="owner-setup" hidden></div>
+<div id="existing-member-link" style="border:1px solid #d7e4e9;background:#f6fafb;border-radius:12px;padding:13px;margin:10px 0 20px">
+<h3 style="font-size:16px;margin:0 0 7px">เชื่อมบัญชีสมาชิกที่มีอยู่แล้ว</h3>
+<p style="font-size:12px;color:#607888;margin:0 0 10px">บัญชีทั้งสามมีอยู่ใน Firebase Authentication แล้ว กดเชื่อมสิทธิ์ทีละบัญชี ไม่ต้องสร้างซ้ำ ไม่เปลี่ยนรหัสผ่านหรือข้อมูลเงินเดือน ตรวจสอบ UID ให้ตรงกับ Firebase Authentication ก่อนกด</p>
+<div id="existing-account-list" style="display:grid;gap:9px"></div>
+</div>
 <div id="member-create"><label for="new-username">ชื่อผู้ใช้ใหม่</label><input id="new-username" minlength="3" maxlength="24" placeholder="เช่น user01" autocomplete="off" autocapitalize="none" spellcheck="false"><label for="new-password">รหัสผ่านใหม่ (อย่างน้อย 6 ตัวอักษร)</label><input id="new-password" type="password" minlength="6" autocomplete="new-password"><div class="tool-row"><button class="btn primary" id="create-member" type="button">สร้างผู้ใช้และให้สิทธิ์แก้ไขข้อมูล</button></div><p style="font-size:12px;color:#607888">สร้างเฉพาะสมาชิกโดย Admin • ใช้ชื่อผู้ใช้บนทุกอุปกรณ์ • ไม่ใช้ Cloud Functions</p><h3 style="font-size:16px;margin-top:18px">สมาชิก</h3><p style="font-size:12px;color:#607888">หากสมาชิกเข้าสู่ระบบไม่ได้ ให้กด “ตรวจ/ซ่อมสิทธิ์” ของบัญชีนั้นก่อน ไม่ต้องลบหรือสร้างบัญชีใหม่</p><div id="username-list"></div></div>
 <div id="users-message" role="status" aria-live="polite" style="font-size:13px;margin-top:12px;white-space:pre-wrap"></div><div class="dialog-actions"><button class="btn" id="close-users" type="button">ปิด</button></div></div></div>
 <div class="modal" id="reset-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="dialog"><h3 id="modal-title">รีเซ็ตข้อมูลเดือนนี้?</h3><p>การรีเซ็ตจะคืนค่ารายการของเดือนที่เลือกเท่านั้น เดือนอื่น ๆ และปีอื่น ๆ จะไม่ถูกลบ</p><div class="dialog-actions"><button class="btn" id="cancel-reset">ยกเลิก</button><button class="btn primary" id="confirm-reset">ยืนยันรีเซ็ต</button></div></div></div>
@@ -606,6 +611,53 @@ $('user-admin-button').addEventListener('click',async()=>{
 });
 $('close-users').addEventListener('click',()=>$('users-modal').classList.remove('show'));
 $('users-modal').addEventListener('click',e=>{if(e.target===$('users-modal'))$('users-modal').classList.remove('show')});
+// Link known, pre-existing Auth identities to the signed-in Admin's workspace.
+// This does not create Auth users, reset passwords, or modify salary documents.
+const existingAccounts=[
+ {username:'user001',uid:'WMKGKnwlf8RlQmdFZYOPICwzbb72'},
+ {username:'user002',uid:'LeukH5JKKUgxfuqk8OFNaKk914I3'},
+ {username:'user003',uid:'KBwnQLGD6VTzTd6jijwkQj4Ok0v2'}
+];
+function renderExistingAccountLinks(){
+ const list=$('existing-account-list');list.textContent='';
+ for(const account of existingAccounts){
+  const line=document.createElement('div');line.style.cssText='display:flex;gap:8px;align-items:center;flex-wrap:wrap;border-top:1px solid #e0e9ed;padding-top:9px';
+  const info=document.createElement('span');info.style.cssText='flex:1;min-width:145px;font-size:12px;overflow-wrap:anywhere';
+  const strong=document.createElement('strong');strong.textContent=account.username+' ';info.appendChild(strong);
+  info.appendChild(document.createTextNode(account.uid));
+  const button=document.createElement('button');button.type='button';button.className='btn';button.textContent='เชื่อมสิทธิ์';
+  button.addEventListener('click',async()=>{
+   if(!isOwner()){usersMessage('ต้องเข้าสู่ระบบ Admin เจ้าของข้อมูลก่อน',true);return}
+   if(!confirm('ตรวจ UID ของ '+account.username+' ใน Firebase Authentication แล้วหรือไม่?\n'+account.uid+'\n\nจะเชื่อมบัญชีนี้กับข้อมูลเงินเดือนของ Admin ที่กำลังเข้าสู่ระบบ โดยไม่แก้บัญชีและข้อมูลเงินเดือน'))return;
+   button.disabled=true;
+   try{
+    const owner=currentUser.uid;
+    const profileRef=profileDoc(account.uid);
+    const memberRef=memberDoc(owner,account.uid);
+    const [profile,member]=await Promise.all([getDoc(profileRef),getDoc(memberRef)]);
+    if(profile.exists()&&profile.data().ownerUid&&profile.data().ownerUid!==owner){
+      throw new Error('โปรไฟล์นี้ผูกกับ Admin คนละ UID หยุดเพื่อป้องกันการย้ายสิทธิ์ผิดบัญชี');
+    }
+    if(profile.exists()&&profile.data().username&&normalizeUsername(profile.data().username)!==account.username){
+      throw new Error('โปรไฟล์ UID นี้มี username อื่นอยู่ กรุณาตรวจสอบบัญชี Authentication ก่อน');
+    }
+    if(member.exists()&&member.data().username&&normalizeUsername(member.data().username)!==account.username){
+      throw new Error('UID นี้มีสมาชิกชื่ออื่นอยู่ใน workspaces กรุณาตรวจสอบก่อน');
+    }
+    const batch=writeBatch(db);
+    batch.set(profileRef,{ownerUid:owner,username:account.username,...(profile.exists()?{}:{createdAt:serverTimestamp()})},{merge:true});
+    batch.set(memberRef,{username:account.username,enabled:true,updatedAt:serverTimestamp(),...(member.exists()?{}:{addedAt:serverTimestamp()})},{merge:true});
+    await batch.commit();
+    usersMessage('เชื่อม '+account.username+' สำเร็จ • UID '+account.uid+' • ลองเข้าสู่ระบบสมาชิกอีกครั้ง');
+    await showUsernameUsers();
+    button.textContent='เชื่อมแล้ว';
+   }catch(err){usersMessage('เชื่อม '+account.username+' ไม่สำเร็จ: '+authMessage(err)+' หากเป็น permission-denied ต้องตรวจ Firestore Rules ไม่ควรเปิดสิทธิ์สาธารณะ',true)}
+   finally{button.disabled=false}
+  });
+  line.append(info,button);list.append(line);
+ }
+}
+renderExistingAccountLinks();
 $('create-member').addEventListener('click',async()=>{
  if(!isOwner()){usersMessage('เฉพาะ Admin เท่านั้น',true);return}
  const username=normalizeUsername($('new-username').value),password=$('new-password').value;
