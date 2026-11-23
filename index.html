@@ -175,9 +175,68 @@ body.workspace-loading main.wrap{pointer-events:none;opacity:.54}
 
 /* Hide optional toolbar actions without disrupting existing Firebase event handlers. */
 #import-local, #workspace-button, #export, #export-year { display: none !important; }
+/* Admin entry is available through ?admin=1; hide its button on the public login screen. */
+#register-button{display:none!important}
+
+/* Salary login refresh — presentation only, Firebase and access logic unchanged. */
+.auth-overlay{
+  padding:clamp(18px,4vw,48px);background:#071b2b;isolation:isolate;overflow:auto;
+  min-height:100dvh;position:fixed;
+}
+.auth-overlay::before{
+  inset:0;z-index:-2;transform:none;filter:none;
+  background:radial-gradient(ellipse at 15% 18%,#204e62 0%,transparent 43%),
+  radial-gradient(ellipse at 93% 84%,#126f6a 0%,transparent 36%),
+  linear-gradient(135deg,#071b2b 0%,#0e2f3e 55%,#112f36 100%);
+}
+.auth-overlay::after{
+  top:auto;right:-160px;bottom:-310px;width:680px;height:680px;
+  border:1px solid rgba(181,255,229,.12);box-shadow:0 0 0 85px rgba(255,255,255,.025),0 0 0 180px rgba(255,255,255,.02);filter:none;
+}
+.login-shell{width:min(920px,100%);min-height:530px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.2)}
+.login-intro{display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;padding:42px 39px;color:#fff;background:linear-gradient(158deg,#15384a,#0a293a 62%,#0b474a)}
+.login-intro::after{content:'';position:absolute;width:310px;height:310px;border:1px solid rgba(200,255,244,.14);border-radius:50%;bottom:-145px;right:-145px;box-shadow:0 0 0 56px rgba(255,255,255,.035),0 0 0 110px rgba(255,255,255,.024)}
+.login-intro>*{position:relative;z-index:1}
+.login-brand{display:flex;align-items:center;gap:13px;font-size:15px;font-weight:750;letter-spacing:.02em}
+.login-brand-mark{width:43px;height:43px;display:grid;place-items:center;border-radius:14px;background:#b0eee0;color:#0c4145;font-size:27px;font-weight:850}
+.login-intro h2{color:#fff;font-size:clamp(29px,3vw,39px);line-height:1.3;font-weight:800;margin:0 0 14px;letter-spacing:-.035em}
+.login-intro p{color:#b9d4db;font-size:14px;line-height:1.85;margin:0;max-width:320px}
+.login-feature{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:650;color:#b8e1d8}
+.login-feature::before{content:'';width:8px;height:8px;background:#64d4af;border-radius:50%;box-shadow:0 0 0 5px rgba(100,212,175,.1)}
+.auth-overlay .auth-card{display:flex;flex-direction:column;justify-content:center;gap:0;min-width:0;max-width:none;width:100%;margin:0;padding:47px 44px;background:#fff;border:0;box-shadow:none;border-radius:0;isolation:auto;backdrop-filter:none;-webkit-backdrop-filter:none}
+.auth-overlay .auth-card::before,.auth-overlay .auth-card::after{display:none}
+.login-kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#18836f;margin:0 0 9px}
+.auth-overlay .auth-card h2{font-size:29px;font-weight:850;line-height:1.3;letter-spacing:-.035em;text-align:left;color:#112e40;text-shadow:none;margin:0 0 8px}
+.login-lead{font-size:13px;color:#788b98;line-height:1.65;margin:0 0 28px}
+.login-field{margin:0 0 17px;min-width:0}
+.login-field label{display:block;color:#304657;font-size:13px;font-weight:750;margin:0 0 8px}
+.auth-overlay .auth-card .login-field input{display:block;min-height:52px;margin:0;width:100%;font-size:15px;color:#183245;background:#f8fbfc;border:1px solid #dce7ed;border-radius:12px;padding:12px 14px;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;letter-spacing:normal;text-align:left}
+.auth-overlay .auth-card .login-field input:focus{outline:0;border-color:#209b87;box-shadow:0 0 0 4px rgba(32,155,135,.12);background:#fff}
+.auth-overlay .auth-card .login-field input::placeholder{color:#9caab5}
+.login-password-wrap{position:relative}
+.auth-overlay .auth-card .login-password-wrap input{padding-right:80px}
+.auth-overlay .auth-card .password-toggle{position:absolute;top:50%;right:9px;transform:translateY(-50%);width:auto;min-height:33px;padding:4px 9px;border:0;border-radius:8px;background:transparent;color:#607989;font-size:12px;font-weight:750;box-shadow:none;cursor:pointer}
+.auth-overlay .auth-card .password-toggle:hover{background:#edf4f4}
+.auth-overlay .auth-card .auth-error{margin:0 0 13px;line-height:1.5;color:#ba4148;font-size:12px}
+.auth-overlay .auth-card .btn.primary{display:flex;min-height:51px;width:100%;margin:0;border-radius:12px;background:#12394a;color:#fff;font-size:15px;font-weight:800;box-shadow:none;border:1px solid #12394a;letter-spacing:normal}
+.auth-overlay .auth-card .btn.primary:hover{background:#1c5665}
+.auth-overlay .auth-card .btn.primary:active{transform:translateY(1px)}
+.login-footnote{display:flex;align-items:center;justify-content:center;gap:7px;color:#92a3ab;font-size:11px;margin-top:25px;text-align:center;line-height:1.5}
+.login-footnote svg{flex-shrink:0}
+/* Admin is accessed only through ?admin=1. Hide the existing trigger but keep it in DOM for app handlers. */
+#register-button{display:none!important}
+.auth-card.admin-mode .member-fields{display:none!important}
+.auth-card.admin-mode #auth-link-panel{display:grid;gap:12px;margin:4px 0 0}
+.auth-card.admin-mode #auth-link-panel .auth-link-hint{text-align:left!important;color:#667d88!important;margin:0 0 4px!important}
+.auth-card.admin-mode #auth-link-panel input{width:100%;min-height:49px;background:#f8fbfc;border:1px solid #dce7ed;border-radius:12px;box-shadow:none;color:#183245;letter-spacing:normal;text-align:left}
+.auth-card.admin-mode #cancel-link-button{margin-top:4px!important;background:#f2f7f8;border:1px solid #e1e9ed;color:#274656;box-shadow:none}
+@media(max-width:780px){.login-shell{max-width:460px;min-height:0;grid-template-columns:1fr}.login-intro{padding:23px 28px;min-height:115px}.login-intro h2,.login-intro p,.login-feature{display:none}.auth-overlay .auth-card{padding:36px 30px 30px}.login-brand{font-size:14px}.login-brand-mark{width:38px;height:38px}}
+@media(max-width:420px){.auth-overlay{padding:12px}.login-shell{border-radius:21px}.auth-overlay .auth-card{padding:31px 22px 25px}.auth-overlay .auth-card h2{font-size:26px}.login-intro{padding:20px 23px}}
+@media(prefers-reduced-motion:reduce){.auth-overlay .auth-card .btn{transition:none}}
+
 </style>
 </head>
-<body class="cloud-guard"><div class="auth-overlay" id="auth-overlay"><form class="auth-card" id="auth-form"><h2>เงินเดือน</h2><input id="auth-username" type="text" minlength="3" maxlength="24" required autocomplete="username" autocapitalize="none" spellcheck="false" aria-label="ชื่อผู้ใช้" placeholder="ชื่อผู้ใช้"><input id="auth-password" type="password" minlength="6" required autocomplete="current-password" aria-label="รหัสผ่าน" placeholder="รหัสผ่าน"><div class="auth-error" id="auth-error" role="alert" aria-live="polite"></div><button type="submit" class="btn primary" id="login-button">เข้าสู่ระบบ</button><button type="button" class="btn" id="register-button">Admin: เข้าสู่ระบบบัญชีเดิม</button><div id="auth-link-panel" hidden><p class="auth-link-hint">เฉพาะ Admin: เข้าสู่ระบบด้วยอีเมลและรหัสผ่าน Firebase เดิมเพื่อสร้างสมาชิก ข้อมูลเงินเดือนเดิมไม่เปลี่ยนแปลง</p><input id="auth-link-email" type="email" autocomplete="username" aria-label="อีเมลบัญชี Firebase เดิม" placeholder="อีเมลบัญชี Firebase เดิม"><input id="auth-link-password" type="password" minlength="6" autocomplete="current-password" aria-label="รหัสผ่าน Admin เดิม" placeholder="รหัสผ่าน Admin เดิม"><button type="button" class="btn primary" id="link-existing-button">Admin เข้าสู่ระบบ</button><button type="button" class="btn" id="cancel-link-button">ย้อนกลับ</button></div></form></div><main class="wrap">
+<body class="cloud-guard"><div class="auth-overlay" id="auth-overlay"><div class="login-shell"><div class="login-intro" aria-hidden="true"><div class="login-brand"><span class="login-brand-mark">฿</span><span>SALARY SYSTEM</span></div><div><h2>จัดการข้อมูล<br>เงินเดือนอย่างเป็นระบบ</h2><p>พื้นที่ทำงานสำหรับบันทึกและติดตามรายรับ รายจ่าย และสรุปเงินเดือนในแต่ละเดือน</p></div><div class="login-feature">เชื่อมต่อข้อมูลอย่างปลอดภัย</div></div><form class="auth-card" id="auth-form"><div class="login-kicker">WELCOME BACK</div><h2>เข้าสู่ระบบ</h2><p class="login-lead">กรอกชื่อผู้ใช้และรหัสผ่านเพื่อดำเนินการต่อ</p><div class="member-fields"><div class="login-field"><label for="auth-username">ชื่อผู้ใช้</label><input id="auth-username" type="text" minlength="3" maxlength="24" required autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="เช่น user001"></div><div class="login-field"><label for="auth-password">รหัสผ่าน</label><div class="login-password-wrap"><input id="auth-password" type="password" minlength="6" required autocomplete="current-password" placeholder="กรอกรหัสผ่าน"><button type="button" class="password-toggle" id="toggle-auth-password" aria-label="แสดงรหัสผ่าน" aria-pressed="false">แสดง</button></div></div></div><div class="auth-error" id="auth-error" role="alert" aria-live="polite"></div><button type="submit" class="btn primary" id="login-button">เข้าสู่ระบบ <span aria-hidden="true">→</span></button><button type="button" class="btn" id="register-button" tabindex="-1" aria-hidden="true">Admin: เข้าสู่ระบบบัญชีเดิม</button><div id="auth-link-panel" hidden><p class="auth-link-hint">ตั้งค่าชื่อผู้ใช้ admin สำหรับเบราว์เซอร์นี้: เข้าสู่ระบบด้วยอีเมล Admin เดิมหนึ่งครั้ง หลังจากนั้นใช้ชื่อ admin และรหัสผ่านเดิมที่หน้าเข้าสู่ระบบปกติได้</p><input id="auth-link-email" type="email" autocomplete="username" aria-label="อีเมลบัญชี Firebase เดิม" placeholder="อีเมล Admin"><input id="auth-link-password" type="password" minlength="6" autocomplete="current-password" aria-label="รหัสผ่าน Admin เดิม" placeholder="รหัสผ่าน Admin"><button type="button" class="btn" id="toggle-admin-password" style="min-height:36px">แสดง/ซ่อนรหัสผ่าน Admin</button><button type="button" class="btn primary" id="link-existing-button">Admin เข้าสู่ระบบ</button><button type="button" class="btn" id="cancel-link-button">ย้อนกลับ</button></div><div class="login-footnote"><svg width="13" height="15" viewBox="0 0 16 18" fill="none" aria-hidden="true"><rect x="2.5" y="7.5" width="11" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 7.5V5a3 3 0 0 1 6 0v2.5" stroke="currentColor" stroke-width="1.5"/></svg>สำหรับผู้ได้รับอนุญาตให้เข้าใช้งานเท่านั้น</div></form></div></div><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">฿</div><div><h1>เงินเดือน</h1><p class="subtitle">ตำแหน่งเจ้าพนักงานการเงินและบัญชี</p></div></div><div class="actions"><span id="cloud-user"></span><button class="btn" id="copy-previous" type="button">⧉ คัดลอกจากเดือนก่อน</button><button class="btn lock-action" id="lock-month" type="button">🔒 ล็อกเดือนนี้</button><button class="btn" id="import-local" type="button" title="นำข้อมูลที่เคยบันทึกในเบราว์เซอร์เครื่องนี้ขึ้นคลาวด์">⇧ นำเข้าข้อมูลเดิม</button><button class="btn" id="workspace-button" type="button">♧ พื้นที่ข้อมูลร่วม</button><button class="btn" id="user-admin-button" type="button" hidden>จัดการผู้ใช้</button><button class="btn" id="sign-out" type="button">ออกจากระบบ</button><button class="btn" id="export">⇩ ส่งออก CSV</button><button class="btn danger" id="reset">↻ รีเซ็ตข้อมูล</button></div></header>
 <div class="workspace"><div class="ledger-main"><section class="summary" aria-label="สรุปยอด"><div class="stat"><div class="caption"><span class="dot"></span>เดบิต • รายได้ทั้งหมด</div><div class="figure green"><span id="card-debit">0.00</span><span class="unit">บาท</span></div></div><div class="stat"><div class="caption"><span class="dot red"></span>เครดิต • รายจ่ายทั้งหมด</div><div class="figure red"><span id="card-credit">0.00</span><span class="unit">บาท</span></div></div><div class="stat net"><div class="caption"><span class="dot white"></span>ยอดคงเหลือสุทธิ</div><div class="figure"><span id="card-net">0.00</span><span class="unit">บาท</span></div></div></section>
 <div class="lock-banner" id="lock-banner" role="status">🔒 เดือนนี้ล็อกแล้ว — ดูข้อมูลได้ แต่ต้องปลดล็อกก่อนแก้ไขหรือลบข้อมูล</div><section class="panel"><div class="panel-head"><div><h2 id="ledger-title">รายการบัญชี</h2></div><div class="saved" id="save-status" role="status" aria-live="polite">กำลังเชื่อมต่อ...</div></div>
@@ -214,6 +273,20 @@ body.workspace-loading main.wrap{pointer-events:none;opacity:.54}
 <div class="modal" id="reset-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="dialog"><h3 id="modal-title">รีเซ็ตข้อมูลเดือนนี้?</h3><p>การรีเซ็ตจะคืนค่ารายการของเดือนที่เลือกเท่านั้น เดือนอื่น ๆ และปีอื่น ๆ จะไม่ถูกลบ</p><div class="dialog-actions"><button class="btn" id="cancel-reset">ยกเลิก</button><button class="btn primary" id="confirm-reset">ยืนยันรีเซ็ต</button></div></div></div>
 <div class="modal" id="copy-modal" role="dialog" aria-modal="true" aria-labelledby="copy-title"><div class="dialog"><h3 id="copy-title">⧉ คัดลอกข้อมูลจากเดือนก่อน</h3><p id="copy-description"></p><p style="color:#b34e56;font-weight:700;font-size:13px">ข้อมูลในเดือนปลายทางจะถูกแทนที่ทั้งหมด (รายการเดิม จำนวนเวร และยอดเงิน) แต่ข้อมูลเดือนต้นทางจะไม่เปลี่ยนแปลง</p><div class="dialog-actions"><button class="btn" id="cancel-copy" type="button">ยกเลิก</button><button class="btn primary" id="confirm-copy" type="button">ยืนยันคัดลอก</button></div></div></div>
 <div class="modal" id="unlock-modal" role="dialog" aria-modal="true" aria-labelledby="unlock-title"><form class="dialog" id="unlock-form"><h3 id="unlock-title">🔓 ปลดล็อกเดือนนี้</h3><p id="unlock-description">กรอกรหัส 4 หลักเพื่อแก้ไขข้อมูลเดือนนี้</p><label for="unlock-password" style="font-weight:700;display:block;margin-bottom:8px">รหัสปลดล็อก</label><input class="password-input" id="unlock-password" type="password" inputmode="numeric" autocomplete="off" maxlength="4" pattern="[0-9]{4}" placeholder="••••" required><div class="password-error" id="password-error" role="alert" aria-live="polite"></div><div class="dialog-actions"><button class="btn" id="cancel-unlock" type="button">ยกเลิก</button><button class="btn primary" type="submit">ยืนยันปลดล็อก</button></div></form></div>
+<script>
+(function(){
+  const toggle=document.getElementById('toggle-auth-password');
+  const input=document.getElementById('auth-password');
+  if(!toggle||!input)return;
+  toggle.addEventListener('click',function(){
+    const visible=input.type==='password';
+    input.type=visible?'text':'password';
+    toggle.textContent=visible?'ซ่อน':'แสดง';
+    toggle.setAttribute('aria-label',visible?'ซ่อนรหัสผ่าน':'แสดงรหัสผ่าน');
+    toggle.setAttribute('aria-pressed',String(visible));
+  });
+})();
+</script>
 <script type="module">
 import { initializeApp, deleteApp } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js';
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, deleteUser, signOut } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
@@ -493,6 +566,21 @@ $('sign-out').addEventListener('click',async()=>{
 const normalizeUsername=value=>String(value??'').trim().toLowerCase();
 const usernameValid=value=>/^[a-z][a-z0-9_-]{2,23}$/.test(value);
 const internalEmail=username=>`${username}@salary-dcd6b.invalid`;
+// A browser-local alias; no administrator email or password is embedded in public GitHub source.
+// On a new browser/device the owner must sign in at ?admin=1 once to register the alias.
+const ADMIN_ALIAS_KEY='salary_admin_alias_email_v1:'+firebaseConfig.projectId;
+function rememberAdminAlias(user){
+ if(!user?.email || user.email.toLowerCase().endsWith('@salary-dcd6b.invalid'))return;
+ try{localStorage.setItem(ADMIN_ALIAS_KEY,user.email.trim())}catch(e){}
+}
+function resolveLoginEmail(username){
+ if(username!=='admin')return internalEmail(username);
+ let adminEmail='';
+ try{adminEmail=localStorage.getItem(ADMIN_ALIAS_KEY)||''}catch(e){}
+ if(!adminEmail)throw new Error('ต้องตั้งค่า admin บนเบราว์เซอร์นี้ครั้งแรก: เปิด ?admin=1 แล้วเข้าสู่ระบบด้วยอีเมล Admin เดิมหนึ่งครั้ง จากนั้นจะใช้ชื่อ admin ได้');
+ return adminEmail;
+}
+
 const profileDoc=uid=>doc(db,'salaryProfiles',uid);
 const authMessage=err=>{
  const code=err?.code||'';
@@ -509,22 +597,46 @@ $('auth-form').addEventListener('submit',async e=>{
  try{
   const username=normalizeUsername($('auth-username').value),password=$('auth-password').value;
   if(!usernameValid(username))throw new Error('ชื่อผู้ใช้ต้องเป็น a-z, 0-9, _ หรือ - เริ่มด้วยตัวอักษร ความยาว 3–24 ตัว');
-  await signInWithEmailAndPassword(auth,internalEmail(username),password);
+  await signInWithEmailAndPassword(auth,resolveLoginEmail(username),password);
   $('auth-password').value='';
- }catch(err){$('auth-error').textContent=authMessage(err)}
+ }catch(err){$('auth-error').textContent=(normalizeUsername($('auth-username').value)==='admin'&&['auth/invalid-credential','auth/user-not-found','auth/wrong-password'].includes(err?.code))?'ยืนยันตัวตน Admin ไม่สำเร็จ หากเปลี่ยนอีเมล Admin ให้เปิด ?admin=1 แล้วลงชื่อเข้าใช้อีกครั้ง; หากไม่เปลี่ยน ให้ตรวจรหัสผ่าน Firebase Admin เดิม':authMessage(err)}
  finally{$('login-button').disabled=false}
 });
 $('register-button').addEventListener('click',()=>{
  $('auth-link-panel').hidden=false;
  $('auth-form').classList.add('admin-mode');
  $('auth-username').required=false;$('auth-password').required=false;
- $('auth-error').textContent='';$('auth-link-email').focus();
+ $('auth-error').textContent='';$('auth-form').querySelector('h2').textContent='เข้าสู่ระบบ Admin';$('auth-form').querySelector('.login-lead').textContent='ใช้อีเมลและรหัสผ่าน Firebase ของ Admin เดิม';$('auth-link-email').focus();
 });
+// Optional admin-only entry page; this is UI routing, not authentication or authorization.
+if(new URLSearchParams(window.location.search).get('admin')==='1') {
+ $('register-button').click();
+}
 $('cancel-link-button').addEventListener('click',()=>{
  $('auth-link-panel').hidden=true;$('auth-form').classList.remove('admin-mode');
  $('auth-username').required=true;$('auth-password').required=true;
- $('auth-error').textContent='';
+ $('auth-error').textContent='';$('auth-form').querySelector('h2').textContent='เข้าสู่ระบบ';$('auth-form').querySelector('.login-lead').textContent='กรอกชื่อผู้ใช้และรหัสผ่านเพื่อดำเนินการต่อ';
 });
+$('toggle-admin-password').addEventListener('click',()=>{
+ const pw=$('auth-link-password');pw.type=pw.type==='password'?'text':'password';
+});
+// The admin fields live in the same form as member fields; Enter should submit as Admin.
+$('auth-link-password').addEventListener('keydown',e=>{
+ if(e.key==='Enter'){e.preventDefault();$('link-existing-button').click()}
+});
+$('auth-link-email').addEventListener('keydown',e=>{
+ if(e.key==='Enter'){e.preventDefault();$('auth-link-password').focus()}
+});
+const adminAuthMessage=err=>{
+ const code=err?.code||'';
+ if(['auth/invalid-credential','auth/user-not-found','auth/wrong-password'].includes(code))
+  return 'Firebase ปฏิเสธอีเมลหรือรหัสผ่าน Admin (auth/invalid-credential) — ตรวจอีเมล Admin เดิมและรหัสผ่านใน Firebase Authentication';
+ if(code==='auth/invalid-email')return 'รูปแบบอีเมล Admin ไม่ถูกต้อง';
+ if(code==='auth/user-disabled')return 'บัญชี Admin ถูกปิดใช้งานใน Firebase Authentication';
+ if(code==='auth/too-many-requests')return 'มีการลองเข้าสู่ระบบหลายครั้ง กรุณาลองใหม่ภายหลัง';
+ if(code==='auth/network-request-failed')return 'เชื่อมต่อ Firebase ไม่สำเร็จ กรุณาตรวจสอบอินเทอร์เน็ต';
+ return 'Admin Login: '+(code||err?.message||'ไม่ทราบสาเหตุ');
+};
 $('link-existing-button').addEventListener('click',async()=>{
  const email=$('auth-link-email').value.trim(),password=$('auth-link-password').value;
  if(!email||!password){$('auth-error').textContent='กรุณากรอกอีเมลและรหัสผ่าน Admin เดิมให้ครบ';return}
@@ -535,7 +647,7 @@ $('link-existing-button').addEventListener('click',async()=>{
   await signInWithEmailAndPassword(auth,email,password);
   $('auth-link-password').value='';
   if(document.body.classList.contains('cloud-guard'))$('auth-error').textContent='ยืนยันตัวตนสำเร็จ กำลังโหลดข้อมูลเงินเดือนจาก Firebase...';
- }catch(err){$('auth-error').textContent=authMessage(err)}
+ }catch(err){$('auth-error').textContent=adminAuthMessage(err)}
  finally{$('link-existing-button').disabled=false;$('link-existing-button').textContent='Admin เข้าสู่ระบบ'}
 });
 const usersMessage=(msg,error=false)=>{const el=$('users-message');el.textContent=msg;el.style.color=error?'#b8454b':'#176a58'};
@@ -734,6 +846,7 @@ try{
      }else{
       // Existing original Firebase email account owns users/{UID}/months.
       await beginRemoteSync(user,user.uid);
+      rememberAdminAlias(user);
       $('cloud-user').textContent='Admin';
      }
     }catch(err){
