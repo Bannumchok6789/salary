@@ -204,7 +204,7 @@ body.workspace-loading main.wrap{pointer-events:none;opacity:.54}
 <div class="modal" id="users-modal" role="dialog" aria-modal="true" aria-labelledby="users-title"><div class="dialog workspace-panel">
 <h3 id="users-title">จัดการผู้ใช้</h3><p>Admin สร้างชื่อผู้ใช้และรหัสผ่านให้สมาชิกได้ สมาชิกไม่ต้องกรอกอีเมล และจะเข้าถึงข้อมูลเงินเดือนเดียวกันตามสิทธิ์</p>
 <div id="owner-setup" hidden></div>
-<div id="member-create"><label for="new-username">ชื่อผู้ใช้ใหม่</label><input id="new-username" minlength="3" maxlength="24" placeholder="เช่น user01" autocomplete="off" autocapitalize="none" spellcheck="false"><label for="new-password">รหัสผ่านใหม่ (อย่างน้อย 6 ตัวอักษร)</label><input id="new-password" type="password" minlength="6" autocomplete="new-password"><div class="tool-row"><button class="btn primary" id="create-member" type="button">สร้างผู้ใช้และให้สิทธิ์แก้ไขข้อมูล</button></div><p style="font-size:12px;color:#607888">สร้างเฉพาะสมาชิกโดย Admin • ใช้ชื่อผู้ใช้บนทุกอุปกรณ์ • ไม่ใช้ Cloud Functions</p><h3 style="font-size:16px;margin-top:18px">สมาชิก</h3><div id="username-list"></div></div>
+<div id="member-create"><label for="new-username">ชื่อผู้ใช้ใหม่</label><input id="new-username" minlength="3" maxlength="24" placeholder="เช่น user01" autocomplete="off" autocapitalize="none" spellcheck="false"><label for="new-password">รหัสผ่านใหม่ (อย่างน้อย 6 ตัวอักษร)</label><input id="new-password" type="password" minlength="6" autocomplete="new-password"><div class="tool-row"><button class="btn primary" id="create-member" type="button">สร้างผู้ใช้และให้สิทธิ์แก้ไขข้อมูล</button></div><p style="font-size:12px;color:#607888">สร้างเฉพาะสมาชิกโดย Admin • ใช้ชื่อผู้ใช้บนทุกอุปกรณ์ • ไม่ใช้ Cloud Functions</p><h3 style="font-size:16px;margin-top:18px">สมาชิก</h3><p style="font-size:12px;color:#607888">หากสมาชิกเข้าสู่ระบบไม่ได้ ให้กด “ตรวจ/ซ่อมสิทธิ์” ของบัญชีนั้นก่อน ไม่ต้องลบหรือสร้างบัญชีใหม่</p><div id="username-list"></div></div>
 <div id="users-message" role="status" aria-live="polite" style="font-size:13px;margin-top:12px;white-space:pre-wrap"></div><div class="dialog-actions"><button class="btn" id="close-users" type="button">ปิด</button></div></div></div>
 <div class="modal" id="reset-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="dialog"><h3 id="modal-title">รีเซ็ตข้อมูลเดือนนี้?</h3><p>การรีเซ็ตจะคืนค่ารายการของเดือนที่เลือกเท่านั้น เดือนอื่น ๆ และปีอื่น ๆ จะไม่ถูกลบ</p><div class="dialog-actions"><button class="btn" id="cancel-reset">ยกเลิก</button><button class="btn primary" id="confirm-reset">ยืนยันรีเซ็ต</button></div></div></div>
 <div class="modal" id="copy-modal" role="dialog" aria-modal="true" aria-labelledby="copy-title"><div class="dialog"><h3 id="copy-title">⧉ คัดลอกข้อมูลจากเดือนก่อน</h3><p id="copy-description"></p><p style="color:#b34e56;font-weight:700;font-size:13px">ข้อมูลในเดือนปลายทางจะถูกแทนที่ทั้งหมด (รายการเดิม จำนวนเวร และยอดเงิน) แต่ข้อมูลเดือนต้นทางจะไม่เปลี่ยนแปลง</p><div class="dialog-actions"><button class="btn" id="cancel-copy" type="button">ยกเลิก</button><button class="btn primary" id="confirm-copy" type="button">ยืนยันคัดลอก</button></div></div></div>
@@ -567,7 +567,35 @@ async function showUsernameUsers(){
     await showUsernameUsers();
    }catch(err){usersMessage('ลบสิทธิ์ไม่สำเร็จ: '+authMessage(err),true);remove.disabled=false}
   });
-  const controls=document.createElement('div');controls.className='member-controls';controls.append(btn,remove);
+  // Repair only the signed-in Admin's existing members. Never change salary documents.
+  const repair=document.createElement('button');repair.type='button';repair.className='btn';
+  repair.textContent='ตรวจ/ซ่อมสิทธิ์';
+  repair.setAttribute('aria-label','ตรวจและซ่อมสิทธิ์ของ '+(data.username||member.id));
+  repair.addEventListener('click',async()=>{
+   if(!isOwner())return;
+   const username=normalizeUsername(data.username);
+   if(!usernameValid(username)){
+    usersMessage('ชื่อผู้ใช้ใน members ไม่ถูกต้อง: '+(data.username||'(ว่าง)')+' — ตรวจสอบเอกสารนี้ก่อน',true);return;
+   }
+   repair.disabled=true;
+   try{
+    const owner=currentUser.uid;
+    const profileRef=profileDoc(member.id);
+    const profile=await getDoc(profileRef);
+    const existing=profile.exists()?profile.data():null;
+    if(existing?.ownerUid===owner && existing?.username===username && data.enabled===true){
+     usersMessage('ตรวจสอบ '+username+' แล้ว: โปรไฟล์และสิทธิ์ตรงกัน ไม่ต้องแก้ไข');return;
+    }
+    if(data.enabled!==true){
+     usersMessage(username+' ถูกปิดสิทธิ์อยู่ ให้กด “เปิดสิทธิ์” ก่อน',true);return;
+    }
+    if(!confirm('ซ่อมโปรไฟล์ '+username+' ให้ใช้ UID สมาชิกเดิม '+member.id+' และ UID Admin ที่กำลังเข้าสู่ระบบหรือไม่?\n\nไม่แก้ไขข้อมูลเงินเดือนหรือบัญชี Authentication'))return;
+    await setDoc(profileRef,{ownerUid:owner,username, ...(existing?{}:{createdAt:serverTimestamp()})},{merge:true});
+    usersMessage('ซ่อมโปรไฟล์ '+username+' สำเร็จ กรุณาทดลองเข้าสู่ระบบสมาชิกอีกครั้ง');
+   }catch(err){usersMessage('ซ่อมโปรไฟล์ไม่ได้: '+authMessage(err)+' — อาจต้องปรับ Firestore Rules โดยตรวจสอบสิทธิ์ Admin ก่อน',true)}
+   finally{repair.disabled=false}
+  });
+  const controls=document.createElement('div');controls.className='member-controls';controls.append(btn,repair,remove);
   line.append(name,controls);list.append(line);
  });
 }
@@ -630,8 +658,14 @@ try{
      if(internal){
       // Unlike an Auth account, a profile can only be created by Admin per Rules.
       const profile=await getDoc(profileDoc(user.uid));
-      if(!profile.exists()||!validUid(profile.data().ownerUid)||profile.data().username!==normalizeUsername(user.email.split('@')[0]))throw new Error('บัญชีนี้ยังไม่ได้รับการอนุญาตจาก Admin');
-      await beginRemoteSync(user,profile.data().ownerUid);
+      if(!profile.exists())throw new Error('ไม่พบ salaryProfiles สำหรับ UID ของบัญชีนี้ กรุณาให้ Admin กด “ตรวจ/ซ่อมสิทธิ์”');
+      const profileData=profile.data();
+      if(!validUid(profileData.ownerUid))throw new Error('ownerUid ใน salaryProfiles ไม่ถูกต้อง กรุณาให้ Admin กด “ตรวจ/ซ่อมสิทธิ์”');
+      if(profileData.username!==normalizeUsername(user.email.split('@')[0]))throw new Error('username ใน salaryProfiles ไม่ตรงกับบัญชีที่ล็อกอิน กรุณาให้ Admin กด “ตรวจ/ซ่อมสิทธิ์”');
+      const memberAccess=await getDoc(memberDoc(profileData.ownerUid,user.uid));
+      if(!memberAccess.exists())throw new Error('ไม่พบสิทธิ์ members ภายใต้ UID Admin ที่โปรไฟล์ระบุ กรุณาให้ Admin ตรวจ ownerUid และกด “ตรวจ/ซ่อมสิทธิ์”');
+      if(memberAccess.data().enabled!==true)throw new Error('บัญชีนี้ถูกปิดสิทธิ์ใน members กรุณาติดต่อ Admin');
+      await beginRemoteSync(user,profileData.ownerUid);
       $('cloud-user').textContent=profile.data().username+' • สมาชิก';
      }else{
       // Existing original Firebase email account owns users/{UID}/months.
