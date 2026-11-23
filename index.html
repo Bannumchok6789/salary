@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>เงินเดือน | เจ้าพนักงานการเงินและบัญชี</title>
+<style>
+:root{--ink:#172b3a;--muted:#718292;--line:#e5edf1;--bg:#f3f7f9;--white:#fff;--green:#127a59;--greenbg:#eaf8f1;--red:#bf5157;--redbg:#fff1f1;--navy:#153047;--shadow:0 14px 38px rgba(25,55,73,.065)}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Sarabun","Noto Sans Thai",Tahoma,system-ui,sans-serif;font-size:15px}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:2px solid #64b9a5;outline-offset:2px}.wrap{max-width:1150px;margin:auto;padding:30px 24px 62px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:26px}.brand{display:flex;align-items:center;gap:14px}.logo{background:var(--navy);color:#fff;width:47px;height:47px;border-radius:15px;display:grid;place-items:center;font-size:24px;font-weight:800}.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#748c97;font-weight:800}.brand h1{font-size:25px;letter-spacing:-.03em;margin:3px 0 0}.subtitle{color:var(--muted);margin:4px 0 0;font-size:13px}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid #dce7ec;background:#fff;color:#244052;display:inline-flex;align-items:center;gap:8px;justify-content:center;padding:10px 15px;border-radius:11px;font-weight:700;white-space:nowrap;transition:background .15s}.btn:hover{background:#edf4f6}.btn.primary{background:var(--navy);color:#fff;border-color:var(--navy)}.btn.primary:hover{background:#24485e}.btn.danger{color:#b1474e}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:24px}.stat{background:#fff;border:1px solid #e7edf0;border-radius:17px;padding:21px 22px;box-shadow:var(--shadow)}.stat.net{background:var(--navy);border-color:var(--navy);color:#fff}.stat .caption{display:flex;align-items:center;gap:9px;font-size:13px;color:#657e8c;font-weight:700}.stat.net .caption{color:#b8d0dd}.dot{width:9px;height:9px;border-radius:50%;background:var(--green)}.dot.red{background:var(--red)}.dot.white{background:#9bc9cb}.stat .figure{font-size:clamp(23px,2.6vw,32px);letter-spacing:-.045em;font-weight:800;margin-top:12px;white-space:nowrap;font-variant-numeric:tabular-nums}.figure.green{color:var(--green)}.figure.red{color:var(--red)}.stat .unit{font-size:13px;font-weight:500;margin-left:5px;opacity:.66}.panel{border:1px solid #e1eaf0;background:#fff;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}.panel-head{padding:19px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px}.panel-head h2{font-size:18px;margin:0}.hint{font-size:12px;color:var(--muted);margin:5px 0 0}.saved{font-size:12px;color:#4f9078;display:flex;align-items:center;gap:6px}.saved:before{content:'';width:7px;height:7px;background:#36a879;border-radius:50%}.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:850px;table-layout:fixed}col.item{width:52%}col.debit,col.credit{width:20%}col.manage{width:8%}thead{background:#203b4f;color:#eef5f7}th{padding:14px 18px;font-size:13px;font-weight:700;text-align:left}th.money-head{text-align:right}th.manage{text-align:center}tbody tr.data-row{border-bottom:1px solid var(--line);transition:background .12s}tbody tr.data-row:hover{background:#f9fcfd}.section td{padding:11px 18px;font-size:13px;font-weight:800;letter-spacing:.01em}.section.inc td{background:#eff8f3;color:#167451;border-top:1px solid #deebe3}.section.exp td{background:#fff3f3;color:#b34e56;border-top:1px solid #f2e5e5}.row-label{padding:10px 18px}.row-label input.name{width:100%;border:1px solid transparent;background:transparent;border-radius:7px;min-height:34px;padding:5px 7px 5px 0;color:var(--ink);font-weight:550}.row-label input.name:hover{border-color:#dce7ec;padding-left:7px}.row-label input.name:focus{border-color:#56a38d;background:#fff;padding-left:7px;outline:0}.shift-line{display:flex;align-items:center;flex-wrap:nowrap;gap:11px;min-width:0}.shift-title{font-weight:750;white-space:nowrap;min-width:58px}.shift-controls{display:flex;align-items:center;gap:8px;min-width:0}.qty-input{width:82px;text-align:right;border:1px solid #cadbdc;border-radius:10px;padding:8px 11px;background:#fff;font-weight:750;font-variant-numeric:tabular-nums;color:#1c4653;box-shadow:0 1px 3px #173b4410}.qty-input:focus{outline:0;border-color:#239778;box-shadow:0 0 0 3px #31ad8120}.multiply{background:#eff5f5;color:#526978;font-size:12px;font-weight:800;padding:8px 10px;border-radius:8px;white-space:nowrap;font-variant-numeric:tabular-nums}.money-cell{padding:0 18px;text-align:right;vertical-align:middle;font-size:15px;font-variant-numeric:tabular-nums;font-weight:750;white-space:nowrap}.money-cell.debit{color:var(--green);background:#f9fdfb}.money-cell.credit{color:var(--red);background:#fffafa}.money-cell.empty{color:#c6d0d5;font-weight:400}.amount-input{display:block;text-align:right;box-sizing:border-box;width:100%;margin:0;padding:12px 0;border:0;outline:0;background:transparent;color:inherit;font-variant-numeric:tabular-nums;font-weight:750;letter-spacing:0;border-radius:0}.amount-input:focus{outline:0;background:#e8f6f1;box-shadow:inset 0 -2px #40a889}.credit .amount-input:focus{background:#fff0f0;box-shadow:inset 0 -2px #d97a7f}.calculated{display:block;text-align:right;padding:12px 0;letter-spacing:0}.remove-cell{text-align:center;padding:0 8px}.delete{border:0;background:transparent;color:#9dadb7;border-radius:8px;width:36px;height:36px;font-size:17px}.delete:hover{background:#ffeded;color:#cb5257}.fixed-shift-mark{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;font-size:15px;opacity:.55;cursor:default}.add-row td{padding:12px 18px 16px;border-bottom:1px solid #e8edf0}.add{border:1px dashed #bbd7ca;background:#f5fbf7;color:#277e5c;border-radius:10px;padding:9px 13px;font-weight:800}.add:hover{background:#eaf8f0}.add.exp{color:#a65159;background:#fff8f8;border-color:#e7c4c8}.add.exp:hover{background:#fff0f0}tfoot tr.total{background:#f3f7f9;border-top:2px solid #dce7ec}tfoot tr.total td{padding:17px 18px;font-weight:850}tfoot tr.total td:nth-child(2){text-align:right;color:var(--green)}tfoot tr.total td:nth-child(3){text-align:right;color:var(--red)}tfoot tr.balance{background:#203b4f;color:#fff}tfoot tr.balance td{padding:16px 18px;font-weight:800}tfoot tr.balance td:last-child{text-align:right;font-size:22px;font-variant-numeric:tabular-nums;color:#b6f0db}.below{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:14px;color:#82939e;font-size:12px}.below strong{color:#536e7a}.modal{position:fixed;inset:0;background:#102b3ab0;display:none;place-items:center;padding:20px;z-index:30}.modal.show{display:grid}.dialog{background:#fff;border-radius:18px;max-width:420px;width:100%;padding:24px;box-shadow:0 22px 70px #0002}.dialog h3{margin:0 0 9px;font-size:20px}.dialog p{color:var(--muted);line-height:1.7}.dialog-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px}.negative{color:#ffc5c7!important}@media(max-width:720px){.wrap{padding:17px 12px 38px}.top{align-items:flex-start;flex-direction:column}.brand h1{font-size:22px}.actions{width:100%}.actions .btn{flex:1}.summary{grid-template-columns:1fr 1fr;gap:9px}.stat{padding:15px}.stat.net{grid-column:span 2}.stat .figure{font-size:24px}.panel-head{padding:16px}.below{align-items:flex-start;flex-direction:column}}@media print{body{background:#fff}.wrap{max-width:none;padding:0}.actions,.delete,.add-row,.saved,.below{display:none!important}.panel,.stat{box-shadow:none}.summary{margin-bottom:12px}.amount-input{padding:12px 0}}
+
+/* Twelve-month navigator, to the right of the ledger */
+.wrap{max-width:1480px}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:20px;align-items:start}.ledger-main{min-width:0}.month-sidebar{background:#fff;border:1px solid #e1eaf0;border-radius:18px;box-shadow:var(--shadow);position:sticky;top:18px;overflow:hidden}.sidebar-head{padding:22px 19px 13px;border-bottom:1px solid var(--line)}.sidebar-head h2{margin:4px 0 17px;font-size:22px}.sidebar-head label{display:block;font-size:12px;font-weight:800;color:#627d8c;margin-bottom:7px}.sidebar-head p{font-size:12px;color:var(--muted);line-height:1.6;margin:12px 0 0}.year-controls{display:grid;grid-template-columns:34px minmax(0,1fr) 34px;gap:7px}.year-controls input{text-align:center;min-width:0;border:1px solid #d6e4e8;border-radius:10px;padding:8px 4px;font-size:19px;font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums}.year-controls button{border:1px solid #e0e8ed;border-radius:9px;background:#f6f9fa;font-size:22px;color:#436273}.month-list{padding:11px;display:grid;gap:3px;max-height:560px;overflow-y:auto}.month-button{width:100%;border:1px solid transparent;background:transparent;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;padding:11px 12px;border-radius:10px;color:#4d6372;font-weight:700}.month-button:hover{background:#f3f8f8}.month-button.active{background:#eaf6f0;border-color:#c4e8d5;color:#0d7050}.month-button .month-index{font-size:11px;color:#8ca0aa;min-width:20px;font-variant-numeric:tabular-nums}.month-button.active .month-index{color:#13805d}.month-button .month-name{flex:1}.month-button .month-status{width:7px;height:7px;border-radius:50%;background:#dce5e9}.month-button.has-data .month-status{background:#40ab83}.month-button.active .month-status{background:#15865d}.annual-summary{border-top:1px solid var(--line);background:#f8fbfa;padding:17px 18px;display:grid;gap:7px}.annual-summary>div:first-child{font-weight:750;font-size:13px;margin-bottom:5px}.annual-summary small{font-size:11px;color:#78909b}.annual-summary>strong{font-size:17px;font-variant-numeric:tabular-nums;text-align:right}.annual-summary .green{color:var(--green)}.annual-summary .red{color:var(--red)}.annual-balance{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #dfeae9;margin-top:7px;padding-top:11px;font-size:13px}.annual-balance strong{font-size:16px;font-variant-numeric:tabular-nums}.annual-export{width:100%;margin-top:7px;padding:9px 8px;font-size:12px}.panel-head{flex-wrap:wrap}.month-tag{color:#0d8060}.top{margin-bottom:23px}@media(max-width:1050px){.workspace{grid-template-columns:minmax(0,1fr) 220px;gap:13px}.month-sidebar{top:12px}.wrap{padding-left:14px;padding-right:14px}.stat{padding:15px 14px}.stat .figure{font-size:25px}.money-cell{padding-left:12px;padding-right:12px}.row-label{padding-left:12px;padding-right:12px}}@media(max-width:820px){.workspace{display:flex;flex-direction:column-reverse}.month-sidebar{position:static;width:100%}.sidebar-head{padding:14px 16px}.sidebar-head h2{font-size:17px;margin:0 0 8px}.sidebar-head p{margin:6px 0 0}.year-controls{max-width:260px}.month-list{display:flex;overflow-x:auto;max-height:none;white-space:nowrap;padding:10px}.month-button{min-width:106px;flex:0 0 auto;padding:9px;gap:5px}.month-button .month-status{flex-shrink:0}.annual-summary{display:none}.ledger-main{width:100%}}@media print{.workspace{display:block}.month-sidebar{display:none!important}}
+
+/* Month protection */
+.btn.lock-action{background:#eaf5f2;color:#126b53;border-color:#bcded1}
+.btn.lock-action.is-locked{background:#fff4e7;color:#9a5915;border-color:#f1d5a8}
+.lock-banner{display:none;align-items:center;gap:10px;background:#fff7e9;border:1px solid #f4dab2;border-radius:12px;color:#91551d;padding:11px 15px;font-weight:750;font-size:13px;margin-bottom:12px}
+.lock-banner.show{display:flex}
+.month-button .month-lock{font-size:15px;line-height:1;flex-shrink:0}
+.month-button.is-locked .month-lock{color:#bd7b29}
+.data-row input:disabled{opacity:1;-webkit-text-fill-color:inherit;cursor:default}
+.data-row input.name:disabled:hover{border-color:transparent;padding-left:0}
+.data-row input.amount-input:disabled{background:transparent;box-shadow:none}
+button:disabled{opacity:.38;cursor:not-allowed!important;pointer-events:none}
+.password-input{width:100%;border:1px solid #cbdde4;border-radius:11px;padding:12px 13px;font-size:20px;letter-spacing:.2em;text-align:center;font-variant-numeric:tabular-nums}
+.password-error{min-height:21px;color:#b8454b;font-size:13px;margin-top:8px}
+@media print{.lock-action,.lock-banner,#copy-previous{display:none!important}}
+
+/* Keep the two fixed shift quantity fields on exactly the same vertical line. */
+.shift-line{display:grid;grid-template-columns:minmax(0,1fr) 188px;align-items:center;gap:10px;width:100%;}
+.shift-title{min-width:0;white-space:nowrap;}
+.shift-controls{display:grid;grid-template-columns:82px 98px;gap:8px;align-items:center;justify-self:end;width:188px;}
+.shift-controls .qty-input{width:82px;min-width:82px;}
+.shift-controls .multiply{display:flex;align-items:center;justify-content:center;width:98px;padding:8px 3px;}
+
+/* Monetary amounts in income/debit and expense/credit are black for easy reading. */
+.money-cell.debit,.money-cell.credit,
+.money-cell.debit .amount-input,.money-cell.credit .amount-input,
+tfoot tr.total td:nth-child(2),tfoot tr.total td:nth-child(3),
+.stat .figure.green,.stat .figure.red,
+.annual-summary .green,.annual-summary .red {color:#111827;}
+
+/* Firebase sign-in and connection status */
+body.cloud-guard main.wrap{display:none}
+.auth-overlay{position:fixed;inset:0;z-index:90;background:#f3f7f9;display:grid;place-items:center;padding:20px;overflow:auto}
+.auth-overlay.hidden{display:none}.auth-card{max-width:410px;width:100%;background:#fff;border:1px solid #e1eaf0;border-radius:20px;padding:28px;box-shadow:var(--shadow)}
+.auth-card h2{text-align:center;margin:0;font-size:23px}.auth-card p{color:#607888;text-align:center;line-height:1.6;font-size:13px}
+.auth-card label{display:block;font-size:13px;font-weight:800;margin:15px 0 5px}.auth-card input{width:100%;padding:12px;border:1px solid #cadbdc;border-radius:10px}
+.auth-error{color:#b8454b;min-height:20px;margin-top:10px;font-size:13px}.auth-card .auth-tip{font-size:11px}
+#cloud-user{font-size:12px;color:#627d8c;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;align-self:center}
+.saved:before{flex-shrink:0}.saved.cloud-error{color:#bd4545}.saved.cloud-error:before{background:#bd4545}
+@media print{.auth-overlay,#sign-out,#import-local,#cloud-user{display:none!important}}
+
+/* Minimal salary login */
+.auth-overlay{background:#f3f7f9}
+.auth-card{max-width:380px;padding:38px 30px;border-radius:22px;display:flex;flex-direction:column;gap:13px;box-shadow:0 20px 55px rgba(25,55,73,.08)}
+.auth-card h2{font-size:30px;font-weight:800;color:var(--navy);margin:0 0 17px;letter-spacing:-.025em}
+.auth-card input{margin:0;min-height:48px;padding:12px 15px;background:#fff;border:1px solid #d7e2e8;border-radius:12px}
+.auth-card input:focus{outline:2px solid #8bcabc;outline-offset:1px}
+.auth-card .auth-error{min-height:0;margin:0;line-height:1.5}
+.auth-card .auth-error:empty{display:none}
+.auth-card .btn{width:100%;min-height:46px;margin:0!important;border-radius:12px}
+
+/* iPhone-inspired neutral Liquid Glass login */
+.auth-overlay{
+  isolation:isolate;
+  background:linear-gradient(145deg,#f8f8f8 0%,#e7e7e7 49%,#d5d5d5 100%);
+  overflow:hidden;
+}
+/* Soft monochrome architectural scenery: visible through the transparent panel */
+.auth-overlay::before{
+  content:"";position:absolute;inset:-18%;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(ellipse 22% 33% at 14% 18%,rgba(255,255,255,.95) 0%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 24% 32% at 88% 70%,rgba(85,85,85,.24) 0%,rgba(85,85,85,0) 100%),
+    radial-gradient(ellipse 21% 25% at 72% 12%,rgba(255,255,255,.95) 0%,rgba(255,255,255,0) 100%),
+    conic-gradient(from 25deg at 24% 70%,transparent 0 54deg,rgba(115,115,115,.14) 72deg,rgba(255,255,255,.7) 96deg,transparent 122deg 360deg),
+    linear-gradient(125deg,#e5e5e5,#fafafa 49%,#cecece);
+  filter:blur(23px);
+  transform:rotate(-7deg) scale(1.05);
+}
+.auth-overlay::after{
+  content:"";position:absolute;width:min(56vw,660px);height:min(56vw,660px);
+  top:-32%;right:-13%;z-index:-1;pointer-events:none;
+  border-radius:50%;border:70px solid rgba(255,255,255,.6);
+  box-shadow:0 38px 90px rgba(65,65,65,.15),inset 0 20px 50px rgba(110,110,110,.10);
+  transform:rotate(-20deg);
+  filter:blur(3px);
+}
+.auth-card{
+  position:relative;isolation:isolate;
+  max-width:402px;width:100%;padding:42px 34px 34px;
+  border-radius:34px;
+  background:linear-gradient(145deg,rgba(255,255,255,.28),rgba(255,255,255,.10) 55%,rgba(255,255,255,.21));
+  border:1px solid rgba(255,255,255,.84);
+  box-shadow:
+    0 30px 75px rgba(35,35,35,.16),
+    0 5px 18px rgba(30,30,30,.045),
+    inset 0 2px 1px rgba(255,255,255,.95),
+    inset 0 -1px 1px rgba(255,255,255,.55),
+    inset 2px 0 3px rgba(255,255,255,.50);
+  -webkit-backdrop-filter:blur(27px) saturate(1.1);
+  backdrop-filter:blur(27px) saturate(1.1);
+  gap:13px;
+}
+.auth-card::before{
+  content:"";pointer-events:none;position:absolute;inset:1px;border-radius:33px;z-index:-1;
+  background:linear-gradient(128deg,rgba(255,255,255,.45),transparent 35% 66%,rgba(255,255,255,.24));
+  -webkit-mask:linear-gradient(#000,#000) content-box,linear-gradient(#000,#000);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  padding:1px;
+}
+.auth-card::after{
+  content:"";pointer-events:none;position:absolute;left:17%;right:17%;top:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.98),transparent);
+  filter:blur(.5px);
+}
+.auth-card h2{font-size:32px;font-weight:760;letter-spacing:-.035em;margin:0 0 21px;color:#222;text-shadow:0 1px 0 rgba(255,255,255,.55)}
+.auth-card input{
+  border-radius:17px;min-height:53px;padding:13px 17px;
+  background:rgba(255,255,255,.34);
+  border:1px solid rgba(255,255,255,.76);
+  box-shadow:inset 0 1px 2px rgba(75,75,75,.055),0 1px 1px rgba(255,255,255,.55);
+  color:#252525;
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+}
+.auth-card input::placeholder{color:#686868;opacity:1}
+.auth-card input:focus{outline:2px solid rgba(60,60,60,.27);outline-offset:1px;background:rgba(255,255,255,.62);border-color:rgba(255,255,255,.95)}
+.auth-card .btn{min-height:51px;border-radius:17px;font-weight:750;transition:transform .15s ease,background .15s ease,box-shadow .15s ease}
+.auth-card .btn:active{transform:scale(.985)}
+.auth-card .btn.primary{
+  background:linear-gradient(180deg,rgba(42,42,42,.92),rgba(12,12,12,.92));
+  border:1px solid rgba(50,50,50,.6);color:#fff;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.32),0 7px 14px rgba(0,0,0,.16);
+}
+.auth-card .btn.primary:hover{background:linear-gradient(180deg,#393939,#191919)}
+.auth-card .btn:not(.primary){
+  background:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.83);color:#272727;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.8),0 3px 8px rgba(0,0,0,.045);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+}
+.auth-card .btn:not(.primary):hover{background:rgba(255,255,255,.48)}
+@media(max-width:480px){.auth-overlay{padding:18px}.auth-card{padding:38px 24px 28px;border-radius:30px}.auth-card::before{border-radius:29px}.auth-overlay::after{top:-12%;right:-48%;width:360px;height:360px}}
+@media(prefers-reduced-motion:reduce){.auth-card .btn{transition:none}}
+
+/* Local username alias setup (no passwords stored). */
+#auth-link-panel[hidden]{display:none!important}
+.auth-card.admin-mode #auth-username,.auth-card.admin-mode #auth-password,.auth-card.admin-mode #login-button,.auth-card.admin-mode #register-button{display:none!important}
+.auth-card.admin-mode #auth-link-panel{display:grid}
+#auth-link-password{width:100%}
+#auth-link-panel{display:grid;gap:11px;margin-top:4px}
+.auth-link-hint{font-size:12px!important;text-align:left!important;line-height:1.65!important;color:#454545!important;margin:2px 0 5px!important}
+
+#user-admin-button[hidden]{display:none!important}#users-modal .dialog{max-height:90vh;overflow:auto}#users-modal input{width:100%;padding:11px;border:1px solid #c9d9df;border-radius:10px}#users-modal label{display:block;font-size:13px;font-weight:750;margin:13px 0 5px}
+/* Main index: month navigation on left; concise salary header. */
+@media (min-width:821px){.workspace{grid-template-columns:260px minmax(0,1fr)}.month-sidebar{grid-column:1;grid-row:1}.ledger-main{grid-column:2;grid-row:1}}
+@media (min-width:821px) and (max-width:1050px){.workspace{grid-template-columns:220px minmax(0,1fr)}}
+@media (max-width:820px){.workspace{flex-direction:column}.month-sidebar{order:0}.ledger-main{order:1}}
+.brand .subtitle{font-size:14px;color:#62798a;margin-top:6px}.brand h1{font-size:27px}
+
+/* Shared salary workspace management */
+body.workspace-loading main.wrap{pointer-events:none;opacity:.54}
+#workspace-button{border-color:#d0dce3}
+.workspace-panel{max-width:510px}
+.workspace-panel h3{margin:0 0 8px}
+.workspace-panel p{font-size:13px;line-height:1.7;color:#637785}
+.workspace-panel label{display:block;font-weight:750;font-size:13px;margin:14px 0 6px}
+.workspace-panel input{width:100%;padding:11px;border:1px solid #c9d9df;border-radius:10px;font-size:14px}
+.workspace-panel .uid-value{overflow-wrap:anywhere;background:#f2f6f8;border-radius:10px;padding:12px;font-size:12px;user-select:all}
+.workspace-panel .tool-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.workspace-panel .tool-row button{flex:1}
+.workspace-panel .member-row{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid #e7edf0;font-size:12px;overflow-wrap:anywhere}
+.workspace-panel .member-row span{min-width:0;overflow-wrap:anywhere}
+.workspace-panel .member-row button{flex-shrink:0}.workspace-panel .member-controls{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.workspace-panel .member-controls .btn{padding:7px 10px;font-size:12px}
+#workspace-message{font-size:13px;min-height:18px;color:#176a58;margin-top:8px;white-space:pre-wrap}
+@media print{#workspace-button,#workspace-modal{display:none!important}}
+
+/* Hide optional toolbar actions without disrupting existing Firebase event handlers. */
+#import-local, #workspace-button, #export, #export-year { display: none !important; }
+</style>
+</head>
+<body class="cloud-guard"><div class="auth-overlay" id="auth-overlay"><form class="auth-card" id="auth-form"><h2>เงินเดือน</h2><input id="auth-username" type="text" minlength="3" maxlength="24" required autocomplete="username" autocapitalize="none" spellcheck="false" aria-label="ชื่อผู้ใช้" placeholder="ชื่อผู้ใช้"><input id="auth-password" type="password" minlength="6" required autocomplete="current-password" aria-label="รหัสผ่าน" placeholder="รหัสผ่าน"><div class="auth-error" id="auth-error" role="alert" aria-live="polite"></div><button type="submit" class="btn primary" id="login-button">เข้าสู่ระบบ</button><button type="button" class="btn" id="register-button">Admin: เข้าสู่ระบบบัญชีเดิม</button><div id="auth-link-panel" hidden><p class="auth-link-hint">เฉพาะ Admin: เข้าสู่ระบบด้วยอีเมลและรหัสผ่าน Firebase เดิมเพื่อสร้างสมาชิก ข้อมูลเงินเดือนเดิมไม่เปลี่ยนแปลง</p><input id="auth-link-email" type="email" autocomplete="username" aria-label="อีเมลบัญชี Firebase เดิม" placeholder="อีเมลบัญชี Firebase เดิม"><input id="auth-link-password" type="password" minlength="6" autocomplete="current-password" aria-label="รหัสผ่าน Admin เดิม" placeholder="รหัสผ่าน Admin เดิม"><button type="button" class="btn primary" id="link-existing-button">Admin เข้าสู่ระบบ</button><button type="button" class="btn" id="cancel-link-button">ย้อนกลับ</button></div></form></div><main class="wrap">
+<header class="top"><div class="brand"><div class="logo">฿</div><div><h1>เงินเดือน</h1><p class="subtitle">ตำแหน่งเจ้าพนักงานการเงินและบัญชี</p></div></div><div class="actions"><span id="cloud-user"></span><button class="btn" id="copy-previous" type="button">⧉ คัดลอกจากเดือนก่อน</button><button class="btn lock-action" id="lock-month" type="button">🔒 ล็อกเดือนนี้</button><button class="btn" id="import-local" type="button" title="นำข้อมูลที่เคยบันทึกในเบราว์เซอร์เครื่องนี้ขึ้นคลาวด์">⇧ นำเข้าข้อมูลเดิม</button><button class="btn" id="workspace-button" type="button">♧ พื้นที่ข้อมูลร่วม</button><button class="btn" id="user-admin-button" type="button" hidden>จัดการผู้ใช้</button><button class="btn" id="sign-out" type="button">ออกจากระบบ</button><button class="btn" id="export">⇩ ส่งออก CSV</button><button class="btn danger" id="reset">↻ รีเซ็ตข้อมูล</button></div></header>
+<div class="workspace"><div class="ledger-main"><section class="summary" aria-label="สรุปยอด"><div class="stat"><div class="caption"><span class="dot"></span>เดบิต • รายได้ทั้งหมด</div><div class="figure green"><span id="card-debit">0.00</span><span class="unit">บาท</span></div></div><div class="stat"><div class="caption"><span class="dot red"></span>เครดิต • รายจ่ายทั้งหมด</div><div class="figure red"><span id="card-credit">0.00</span><span class="unit">บาท</span></div></div><div class="stat net"><div class="caption"><span class="dot white"></span>ยอดคงเหลือสุทธิ</div><div class="figure"><span id="card-net">0.00</span><span class="unit">บาท</span></div></div></section>
+<div class="lock-banner" id="lock-banner" role="status">🔒 เดือนนี้ล็อกแล้ว — ดูข้อมูลได้ แต่ต้องปลดล็อกก่อนแก้ไขหรือลบข้อมูล</div><section class="panel"><div class="panel-head"><div><h2 id="ledger-title">รายการบัญชี</h2></div><div class="saved" id="save-status" role="status" aria-live="polite">กำลังเชื่อมต่อ...</div></div>
+<div class="table-scroll"><table><colgroup><col class="item"><col class="debit"><col class="credit"><col class="manage"></colgroup><thead><tr><th>รายการ</th><th class="money-head">เดบิต (รายได้)</th><th class="money-head">เครดิต (รายจ่าย)</th><th class="manage">จัดการ</th></tr></thead>
+<tbody id="income-body"><tr class="section inc"><td colspan="4">▣ &nbsp; หมวดรายได้ (เดบิต)</td></tr></tbody><tbody><tr class="add-row"><td colspan="4"><button class="add" id="add-income">＋ เพิ่มรายการรายได้</button></td></tr></tbody>
+<tbody id="expense-body"><tr class="section exp"><td colspan="4">▣ &nbsp; หมวดรายจ่าย (เครดิต)</td></tr></tbody><tbody><tr class="add-row"><td colspan="4"><button class="add exp" id="add-expense">＋ เพิ่มรายการรายจ่าย</button></td></tr></tbody>
+<tfoot><tr class="total"><td>รวมทั้งหมด</td><td id="total-debit">0.00</td><td id="total-credit">0.00</td><td></td></tr><tr class="balance"><td colspan="2">ยอดคงเหลือสุทธิ <span style="opacity:.65;font-size:12px;font-weight:400">(เดบิต − เครดิต)</span></td><td colspan="2" id="net-balance">0.00 บาท</td></tr></tfoot></table></div></section>
+</div><aside class="month-sidebar" aria-label="เลือกปีและเดือน"><div class="sidebar-head"><h2>เลือกเดือน</h2><label for="year-input">ปี พ.ศ.</label><div class="year-controls"><button id="prev-year" type="button" aria-label="ปีก่อนหน้า">‹</button><input id="year-input" type="number" inputmode="numeric" min="2400" max="2900" step="1" aria-label="ปี พ.ศ."><button id="next-year" type="button" aria-label="ปีถัดไป">›</button></div></div><nav class="month-list" id="month-list" aria-label="รายชื่อ 12 เดือน"></nav><div class="annual-summary"><div>สรุปทั้งปี <strong id="annual-year"></strong></div><small>รายได้รวม</small><strong class="green" id="annual-income">0.00</strong><small>รายจ่ายรวม</small><strong class="red" id="annual-expense">0.00</strong><div class="annual-balance">ยอดสุทธิ <strong id="annual-net">0.00</strong></div><button class="btn annual-export" id="export-year">⇩ ส่งออก CSV ทั้งปี</button></div></aside></div>
+</main>
+<div class="modal" id="workspace-modal" role="dialog" aria-modal="true" aria-labelledby="workspace-title"><div class="dialog workspace-panel">
+<h3 id="workspace-title">พื้นที่ข้อมูลเงินเดือนร่วม</h3>
+<p>บัญชีที่เจ้าของอนุญาตจะดูและแก้ไขข้อมูลเดือนเดียวกันได้ทันที โดยใช้ข้อมูล Firebase เดิมของเจ้าของ ไม่ต้องย้ายหรือคัดลอกข้อมูล</p>
+<label>รหัสบัญชีของฉัน (UID)</label><div id="my-uid" class="uid-value"></div>
+<div class="tool-row"><button class="btn" id="copy-my-uid" type="button">คัดลอก UID ของฉัน</button></div>
+<label>รหัสเจ้าของพื้นที่ข้อมูล (UID)</label><input id="workspace-owner-id" type="text" autocomplete="off" spellcheck="false" placeholder="วาง UID ของเจ้าของข้อมูล">
+<div class="tool-row"><button class="btn primary" id="join-workspace" type="button">เปิดข้อมูลร่วม</button><button class="btn" id="own-workspace" type="button">กลับไปข้อมูลของฉัน</button></div>
+<div id="owner-tools" hidden><hr style="border:0;border-top:1px solid #dce5ea;margin:19px 0"><h3 style="font-size:16px">อนุญาตผู้ใช้อื่น</h3><p>ให้ผู้ใช้ใหม่ส่ง UID จากหน้าเดียวกันนี้มา แล้วเพิ่ม UID เพื่อให้สิทธิ์ดูและแก้ไข</p>
+<label for="member-uid">UID ผู้ใช้ที่จะอนุญาต</label><input id="member-uid" type="text" autocomplete="off" spellcheck="false" placeholder="วาง UID ของผู้ใช้">
+<div class="tool-row"><button class="btn primary" id="add-member" type="button">เพิ่มผู้ใช้ที่อนุญาต</button></div>
+<div id="member-list" aria-live="polite"></div></div>
+<div id="workspace-message" role="status" aria-live="polite"></div>
+<div class="dialog-actions"><button class="btn" id="close-workspace" type="button">ปิด</button></div>
+</div></div>
+<div class="modal" id="users-modal" role="dialog" aria-modal="true" aria-labelledby="users-title"><div class="dialog workspace-panel">
+<h3 id="users-title">จัดการผู้ใช้</h3><p>Admin สร้างชื่อผู้ใช้และรหัสผ่านให้สมาชิกได้ สมาชิกไม่ต้องกรอกอีเมล และจะเข้าถึงข้อมูลเงินเดือนเดียวกันตามสิทธิ์</p>
+<div id="owner-setup" hidden></div>
+<div id="member-create"><label for="new-username">ชื่อผู้ใช้ใหม่</label><input id="new-username" minlength="3" maxlength="24" placeholder="เช่น user01" autocomplete="off" autocapitalize="none" spellcheck="false"><label for="new-password">รหัสผ่านใหม่ (อย่างน้อย 6 ตัวอักษร)</label><input id="new-password" type="password" minlength="6" autocomplete="new-password"><div class="tool-row"><button class="btn primary" id="create-member" type="button">สร้างผู้ใช้และให้สิทธิ์แก้ไขข้อมูล</button></div><p style="font-size:12px;color:#607888">สร้างเฉพาะสมาชิกโดย Admin • ใช้ชื่อผู้ใช้บนทุกอุปกรณ์ • ไม่ใช้ Cloud Functions</p><h3 style="font-size:16px;margin-top:18px">สมาชิก</h3><div id="username-list"></div></div>
+<div id="users-message" role="status" aria-live="polite" style="font-size:13px;margin-top:12px;white-space:pre-wrap"></div><div class="dialog-actions"><button class="btn" id="close-users" type="button">ปิด</button></div></div></div>
+<div class="modal" id="reset-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="dialog"><h3 id="modal-title">รีเซ็ตข้อมูลเดือนนี้?</h3><p>การรีเซ็ตจะคืนค่ารายการของเดือนที่เลือกเท่านั้น เดือนอื่น ๆ และปีอื่น ๆ จะไม่ถูกลบ</p><div class="dialog-actions"><button class="btn" id="cancel-reset">ยกเลิก</button><button class="btn primary" id="confirm-reset">ยืนยันรีเซ็ต</button></div></div></div>
+<div class="modal" id="copy-modal" role="dialog" aria-modal="true" aria-labelledby="copy-title"><div class="dialog"><h3 id="copy-title">⧉ คัดลอกข้อมูลจากเดือนก่อน</h3><p id="copy-description"></p><p style="color:#b34e56;font-weight:700;font-size:13px">ข้อมูลในเดือนปลายทางจะถูกแทนที่ทั้งหมด (รายการเดิม จำนวนเวร และยอดเงิน) แต่ข้อมูลเดือนต้นทางจะไม่เปลี่ยนแปลง</p><div class="dialog-actions"><button class="btn" id="cancel-copy" type="button">ยกเลิก</button><button class="btn primary" id="confirm-copy" type="button">ยืนยันคัดลอก</button></div></div></div>
+<div class="modal" id="unlock-modal" role="dialog" aria-modal="true" aria-labelledby="unlock-title"><form class="dialog" id="unlock-form"><h3 id="unlock-title">🔓 ปลดล็อกเดือนนี้</h3><p id="unlock-description">กรอกรหัส 4 หลักเพื่อแก้ไขข้อมูลเดือนนี้</p><label for="unlock-password" style="font-weight:700;display:block;margin-bottom:8px">รหัสปลดล็อก</label><input class="password-input" id="unlock-password" type="password" inputmode="numeric" autocomplete="off" maxlength="4" pattern="[0-9]{4}" placeholder="••••" required><div class="password-error" id="password-error" role="alert" aria-live="polite"></div><div class="dialog-actions"><button class="btn" id="cancel-unlock" type="button">ยกเลิก</button><button class="btn primary" type="submit">ยืนยันปลดล็อก</button></div></form></div>
+<script type="module">
+import { initializeApp, deleteApp } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js';
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, deleteUser, signOut } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
+import { getFirestore, collection, doc, onSnapshot, setDoc, getDoc, getDocs, deleteDoc, writeBatch, serverTimestamp } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js';
+// Paste the Web app configuration from Firebase Console > Project settings > Your apps.
+// This config identifies your project; access control MUST be enforced by Firestore Rules.
+const firebaseConfig = {
+  apiKey: "AIzaSyDwg97q6tsn8ny8PZK5ccwbqXDYORqiGOI",
+  authDomain: "salary-dcd6b.firebaseapp.com",
+  projectId: "salary-dcd6b",
+  storageBucket: "salary-dcd6b.firebasestorage.app",
+  messagingSenderId: "870446551853",
+  appId: "1:870446551853:web:5b230d9ad8eca8a35279a4",
+  measurementId: "G-HFW5LF1ZR8"
+};
+(()=>{'use strict';
+const KEY='personal_ledger_polished_v1';const OLD_KEY='credit_debit_ledger_data_v2';
+const initial=()=>({income:[{id:'shift-normal',name:'ค่าเวร',kind:'shift',qty:12,rate:520},{id:'shift-ot15',name:'เวร 1.5',kind:'shift',qty:4,rate:260},{id:'inc-1',name:'เงินเดือน',kind:'regular',amount:13920},{id:'inc-2',name:'OT ฉ.11 + P4P',kind:'regular',amount:1500}],expense:[{id:'exp-1',name:'ค่าหอพัก / ค่าเช่า',amount:3500},{id:'exp-2',name:'ค่าอาหารและเดินทาง',amount:1000}]});
+const $=id=>document.getElementById(id);const money=n=>(Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});const parse=v=>{const n=Number(String(v??'').replace(/,/g,'').trim());return Number.isFinite(n)?n:0};const clean=v=>String(v??'').replace(/[^\d.,]/g,'').replace(/,/g,'');const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const MONTH_NAMES=['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+const MULTI_KEY='personal_ledger_12_months_v1';
+const now=new Date();let selectedYear=now.getFullYear()+543,selectedMonth=now.getMonth();
+const emptyMonth=()=>({income:[{id:'shift-normal',name:'ค่าเวร',kind:'shift',qty:0,rate:520},{id:'shift-ot15',name:'เวร 1.5',kind:'shift',qty:0,rate:260},{id:'inc-1',name:'เงินเดือน',kind:'regular',amount:0},{id:'inc-2',name:'OT ฉ.11 + P4P',kind:'regular',amount:0}],expense:[{id:'exp-1',name:'ค่าหอพัก / ค่าเช่า',amount:0},{id:'exp-2',name:'ค่าอาหารและเดินทาง',amount:0}]});
+let store={};
+const slot=(y,m)=>`${y}-${String(m+1).padStart(2,'0')}`;
+const validMonth=v=>v&&Array.isArray(v.income)&&Array.isArray(v.expense);
+
+// สองแถวค่าเวรเป็นรายการประจำทุกเดือน ไม่สามารถลบได้
+const mandatoryShifts=[{id:'shift-normal',name:'ค่าเวร',rate:520},{id:'shift-ot15',name:'เวร 1.5',rate:260}];
+function ensureMandatoryShifts(month){
+ if(!validMonth(month))return month;
+ const regular=month.income.filter(r=>!mandatoryShifts.some(s=>s.id===r.id)&&r.kind!=='shift');
+ const shifts=mandatoryShifts.map(s=>{
+  const existing=month.income.find(r=>r.id===s.id)||(month.income.find(r=>r.kind==='shift'&&r.name===s.name));
+  return {id:s.id,name:s.name,kind:'shift',qty:existing?parse(existing.qty):0,rate:s.rate};
+ });
+ month.income=[...shifts,...regular];
+ return month;
+}
+
+// Local data is read ONLY for explicit migration. Remote data is authoritative.
+let state=emptyMonth();
+let auth,db,currentUser=null,unsubscribeMonths=null,cloudReady=false,workspaceOwnerId=null;
+const WORKSPACE_PREF_KEY='salary_workspace_owner_v1:';
+const pendingTimers=new Map(),dirtySlots=new Set(),saveVersions=new Map();
+const status=(msg,isError=false)=>{const e=$('save-status');e.textContent=msg;e.classList.toggle('cloud-error',isError)};
+const clone=v=>JSON.parse(JSON.stringify(v));
+function localLegacyData(){
+ const saved=JSON.parse(localStorage.getItem(MULTI_KEY)||'null');
+ if(saved&&typeof saved==='object'&&!Array.isArray(saved))return saved;
+ let legacy=JSON.parse(localStorage.getItem(KEY)||'null');
+ if(!validMonth(legacy)){
+  const old=JSON.parse(localStorage.getItem(OLD_KEY)||'null');
+  if(validMonth(old))legacy={income:[{id:'shift-normal',name:'ค่าเวร',kind:'shift',qty:parse(old.shifts?.normal??12),rate:520},{id:'shift-ot15',name:'เวร 1.5',kind:'shift',qty:parse(old.shifts?.ot15??4),rate:260},...old.income.map(r=>({...r,kind:'regular'}))],expense:old.expense};
+ }
+ return validMonth(legacy)?{[slot(selectedYear,selectedMonth)]:legacy}:{};
+}
+function cancelQueuedSaves(){for(const timer of pendingTimers.values())clearTimeout(timer);pendingTimers.clear();dirtySlots.clear();saveVersions.clear()}
+function disableApp(){cloudReady=false;document.body.classList.remove('workspace-loading');document.body.classList.add('cloud-guard');$('auth-overlay').classList.remove('hidden');}
+function enableApp(){cloudReady=true;document.body.classList.remove('workspace-loading');document.body.classList.remove('cloud-guard');$('auth-overlay').classList.add('hidden');}
+function formatError(e){const code=e?.code||'';return ({'auth/invalid-credential':'อีเมลหรือรหัสผ่านไม่ถูกต้อง','auth/email-already-in-use':'อีเมลนี้ถูกใช้งานแล้ว','auth/weak-password':'รหัสผ่านไม่ปลอดภัย กรุณาตั้งรหัสที่ยาวขึ้น','auth/invalid-email':'รูปแบบอีเมลไม่ถูกต้อง','auth/too-many-requests':'มีการลองหลายครั้ง กรุณาลองใหม่ภายหลัง','permission-denied':'ไม่มีสิทธิ์เข้าถึง กรุณาตรวจสอบ Firestore Rules','unavailable':'ไม่สามารถเชื่อมต่อ Firestore ได้'}[code]||e?.message||String(e));}
+// The owner's existing users/{ownerUid}/months collection is the one shared dataset.
+// No original salary document is moved, deleted, or replaced during enrollment.
+const validUid=v=>/^[A-Za-z0-9]{20,128}$/.test(v);
+const memberDoc=(owner,member)=>doc(db,'workspaces',owner,'members',member);
+const isOwner=()=>!!currentUser&&workspaceOwnerId===currentUser.uid;
+async function verifyWorkspaceAccess(user,owner){
+ if(owner===user.uid)return true;
+ const member=await getDoc(memberDoc(owner,user.uid));
+ return member.exists()&&member.data().enabled===true;
+}
+async function flushWorkspaceSaves(){
+ for(const [key,timer] of [...pendingTimers]){
+  clearTimeout(timer);pendingTimers.delete(key);
+  await writeMonth(key,saveVersions.get(key));
+ }
+ if(dirtySlots.size)throw new Error('ยังมีรายการที่บันทึกไม่สำเร็จ กรุณาตรวจสอบอินเทอร์เน็ตก่อนเปลี่ยนพื้นที่ข้อมูล');
+}
+async function beginRemoteSync(user,owner=user.uid){
+ const sessionUid=user.uid;
+ if(!validUid(owner))throw new Error('รูปแบบ UID เจ้าของข้อมูลไม่ถูกต้อง');
+ if(!(await verifyWorkspaceAccess(user,owner)))throw new Error('บัญชีนี้ยังไม่ได้รับอนุญาตให้ใช้ข้อมูลร่วม กรุณาให้เจ้าของเพิ่ม UID ของคุณก่อน');
+ if(currentUser?.uid!==sessionUid)return;
+ await flushWorkspaceSaves();
+ if(currentUser?.uid!==sessionUid)return;
+ if(unsubscribeMonths){unsubscribeMonths();unsubscribeMonths=null}
+ cancelQueuedSaves();store={};state=emptyMonth();cloudReady=false;
+ document.body.classList.add('workspace-loading');
+ workspaceOwnerId=owner;
+ $('cloud-user').textContent=(user.email||user.displayName||'ผู้ใช้')+(isOwner()?' • เจ้าของ':' • พื้นที่ร่วม');
+ $('user-admin-button').hidden=!isOwner();
+ $('workspace-owner-id').value=owner;
+ $('owner-tools').hidden=!isOwner();
+ $('import-local').disabled=!isOwner();
+ $('import-local').title=isOwner()?'นำข้อมูลในเบราว์เซอร์ขึ้นบัญชีเจ้าของ':'เฉพาะเจ้าของข้อมูลเท่านั้นที่นำเข้าข้อมูลจากเบราว์เซอร์ได้';
+ status('กำลังโหลดข้อมูล'+(isOwner()?'ของฉัน':'ร่วม')+'จากคลาวด์...');
+ unsubscribeMonths=onSnapshot(collection(db,'users',owner,'months'),{includeMetadataChanges:true},snap=>{
+  if(currentUser?.uid!==sessionUid||workspaceOwnerId!==owner)return;
+  const next={};snap.forEach(d=>{const v=d.data();if(validMonth(v))next[d.id]={income:v.income,expense:v.expense,locked:v.locked===true}});
+  for(const key of dirtySlots){if(validMonth(store[key]))next[key]=store[key]}
+  store=next;
+  if(!cloudReady){ enableApp(); $('auth-error').textContent=''; }
+  if(!dirtySlots.has(currentSlot())&&!document.activeElement?.closest?.('.data-row')){
+   state=ensureMandatoryShifts(validMonth(store[currentSlot()])?clone(store[currentSlot()]):emptyMonth());render();
+  }else{renderMonths()}
+  if(snap.metadata.hasPendingWrites)status('กำลังส่งข้อมูล...');
+  else if(!navigator.onLine||snap.metadata.fromCache)status('ออฟไลน์ / กำลังรอข้อมูลเซิร์ฟเวอร์');
+  else if(!dirtySlots.size)status('ซิงก์กับคลาวด์แล้ว');
+ },err=>{
+  if(currentUser?.uid!==sessionUid||workspaceOwnerId!==owner)return;
+  status('เชื่อมต่อผิดพลาด: '+formatError(err),true);
+  $('auth-error').textContent='เข้าสู่ระบบ Firebase สำเร็จ แต่โหลดข้อมูลเงินเดือนไม่ได้: '+formatError(err);
+  if(unsubscribeMonths){unsubscribeMonths();unsubscribeMonths=null}
+  disableApp();
+ });
+}
+async function writeMonth(key,version){
+ if(!currentUser||!validMonth(store[key]))return;
+ const uid=currentUser.uid,owner=workspaceOwnerId;
+ const data=clone(store[key]);
+ try{
+  await setDoc(doc(db,'users',owner,'months',key),{income:data.income,expense:data.expense,locked:data.locked===true,updatedAt:serverTimestamp()});
+  if(currentUser?.uid!==uid||workspaceOwnerId!==owner)return;
+  if(saveVersions.get(key)===version){dirtySlots.delete(key);saveVersions.delete(key);status('ซิงก์กับคลาวด์แล้ว')}
+ }catch(e){if(currentUser?.uid===uid&&workspaceOwnerId===owner){status('บันทึกไม่สำเร็จ: '+formatError(e),true);alert('บันทึกข้อมูลไม่สำเร็จ กรุณาตรวจสอบการเชื่อมต่อ: '+formatError(e))}}
+}
+const currentSlot=()=>slot(selectedYear,selectedMonth);
+const isLocked=()=>state.locked===true;
+const previousPeriod=()=>selectedMonth===0?{year:selectedYear-1,month:11}:{year:selectedYear,month:selectedMonth-1};
+const periodLabel=(year,month)=>MONTH_NAMES[month]+' พ.ศ. '+year;
+// ชื่อค่าเวรในเดือนบัญชีหมายถึงค่าเวรที่ทำในเดือนก่อนหน้าเสมอ
+const displayItemName=(r,month=selectedMonth)=>r.id==='shift-normal'?'ค่าเวรของเดือน'+MONTH_NAMES[(month+11)%12]:r.name;
+function refreshLockUI(){const locked=isLocked();$('lock-month').textContent=locked?'🔓 ปลดล็อกเดือนนี้':'🔒 ล็อกเดือนนี้';$('lock-month').classList.toggle('is-locked',locked);$('lock-banner').classList.toggle('show',locked);$('add-income').disabled=locked;$('add-expense').disabled=locked;$('reset').disabled=locked;$('copy-previous').disabled=locked;for(const el of document.querySelectorAll('#income-body .data-row input,#expense-body .data-row input,#income-body .data-row .delete,#expense-body .data-row .delete'))el.disabled=locked;if(locked&&!dirtySlots.size)status('🔒 ล็อกเดือนแล้ว')}
+function selectPeriod(year,month){$('unlock-modal').classList.remove('show');$('reset-modal').classList.remove('show');$('copy-modal').classList.remove('show');if(!Number.isInteger(year)||year<2400||year>2900||month<0||month>11)return;if(pendingTimers.has(currentSlot())){const key=currentSlot(),v=saveVersions.get(key);clearTimeout(pendingTimers.get(key));pendingTimers.delete(key);writeMonth(key,v)}selectedYear=year;selectedMonth=month;state=ensureMandatoryShifts(validMonth(store[currentSlot()])?clone(store[currentSlot()]):emptyMonth());$('year-input').value=year;$('ledger-title').textContent='รายการบัญชี • '+MONTH_NAMES[month]+' '+year;render();renderMonths();}
+function renderMonths(){const list=$('month-list');list.textContent='';const annual={debit:0,credit:0};MONTH_NAMES.forEach((name,i)=>{const data=store[slot(selectedYear,i)];if(validMonth(data)){annual.debit+=data.income.reduce((s,r)=>s+rowAmount(r),0);annual.credit+=data.expense.reduce((s,r)=>s+rowAmount(r),0)}const b=document.createElement('button');b.type='button';b.className='month-button'+(i===selectedMonth?' active':'')+(validMonth(data)?' has-data':'')+(data?.locked===true?' is-locked':'');b.setAttribute('aria-current',i===selectedMonth?'date':'false');b.innerHTML=`<span class="month-index">${String(i+1).padStart(2,'0')}</span><span class="month-name">${name}</span><span class="month-status" aria-hidden="true"></span><span class="month-lock" aria-label="${data?.locked===true?'ล็อกแล้ว':'ยังไม่ล็อก'}">${data?.locked===true?'🔒':''}</span>`;b.addEventListener('click',()=>selectPeriod(selectedYear,i));list.appendChild(b)});$('annual-year').textContent=selectedYear;$('annual-income').textContent=money(annual.debit);$('annual-expense').textContent=money(annual.credit);$('annual-net').textContent=money(annual.debit-annual.credit)}
+const rowAmount=r=>r.kind==='shift'?parse(r.qty)*parse(r.rate):parse(r.amount);const totals=()=>({debit:state.income.reduce((a,r)=>a+rowAmount(r),0),credit:state.expense.reduce((a,r)=>a+rowAmount(r),0)});
+function save(){
+ if(!cloudReady||!currentUser){status('ยังไม่ได้เชื่อมต่อ',true);return}
+ const key=currentSlot();store[key]=clone(state);dirtySlots.add(key);
+ const version=(saveVersions.get(key)||0)+1;saveVersions.set(key,version);
+ if(pendingTimers.has(key))clearTimeout(pendingTimers.get(key));
+ status('มีการแก้ไข • กำลังบันทึก...');renderMonths();
+ pendingTimers.set(key,setTimeout(()=>{pendingTimers.delete(key);writeMonth(key,version)},700));
+}
+function recalc(){const {debit,credit}=totals(),net=debit-credit;$('card-debit').textContent=money(debit);$('card-credit').textContent=money(credit);$('card-net').textContent=money(net);$('total-debit').textContent=money(debit);$('total-credit').textContent=money(credit);$('net-balance').textContent=money(net)+' บาท';$('net-balance').classList.toggle('negative',net<0);$('card-net').classList.toggle('negative',net<0)}
+function render(){const ib=$('income-body'),eb=$('expense-body');ib.querySelectorAll('.data-row').forEach(x=>x.remove());eb.querySelectorAll('.data-row').forEach(x=>x.remove());state.income.forEach(r=>ib.appendChild(makeRow('income',r)));state.expense.forEach(r=>eb.appendChild(makeRow('expense',r)));recalc();refreshLockUI()}
+function makeRow(type,r){const tr=document.createElement('tr');tr.className='data-row';tr.dataset.id=r.id;tr.dataset.type=type;const isIncome=type==='income';const isShift=r.kind==='shift';const label=isShift?`<div class="shift-line"><span class="shift-title">${esc(displayItemName(r))}</span><div class="shift-controls"><input class="qty-input" type="text" inputmode="decimal" aria-label="จำนวน${esc(displayItemName(r))}" value="${money(r.qty)}" data-field="qty"><span class="multiply">× ${money(r.rate)}</span></div></div>`:`<input class="name" type="text" aria-label="ชื่อรายการ" placeholder="ระบุชื่อรายการ..." value="${esc(r.name)}" data-field="name">`;
+const cell=(side)=>{const active=isIncome?side==='debit':side==='credit';if(!active)return `<td class="money-cell ${side} empty">—</td>`;if(isShift)return `<td class="money-cell ${side}"><span class="calculated">${money(rowAmount(r))}</span></td>`;return `<td class="money-cell ${side}"><input class="amount-input" type="text" inputmode="decimal" aria-label="จำนวนเงิน${isIncome?'รายได้':'รายจ่าย'}" value="${money(r.amount)}" data-field="amount"></td>`};
+tr.innerHTML=`<td class="row-label">${label}</td>${cell('debit')}${cell('credit')}<td class="remove-cell">${isShift?'<span class="fixed-shift-mark" title="รายการประจำ ไม่สามารถลบได้" aria-label="รายการประจำ ไม่สามารถลบได้">🔒</span>':`<button type="button" class="delete" aria-label="ลบ ${esc(r.name||'รายการ')}" title="ลบรายการ">✕</button>`}</td>`;return tr}
+function updateCell(input){if(isLocked())return;const row=input.closest('tr'),type=row.dataset.type,r=state[type].find(x=>String(x.id)===row.dataset.id);if(!r)return;const field=input.dataset.field;if(field==='name')r.name=input.value;else{r[field]=parse(clean(input.value));if(field==='qty'){const v=row.querySelector('.calculated');if(v)v.textContent=money(rowAmount(r))}}recalc();save()}
+function numberEdit(input){input.addEventListener('focus',()=>{input.value=String(parse(input.value));input.select()});input.addEventListener('input',()=>{input.value=clean(input.value);updateCell(input)});input.addEventListener('blur',()=>{input.value=money(input.value);updateCell(input)})}
+for(const body of [$('income-body'),$('expense-body')]){body.addEventListener('focusin',e=>{if(isLocked())return;if(e.target.matches('input[data-field="amount"],input[data-field="qty"]')&&!e.target.dataset.bound){e.target.dataset.bound='1';numberEdit(e.target);e.target.value=String(parse(e.target.value));e.target.select()}});body.addEventListener('input',e=>{if(e.target.matches('input[data-field="name"]'))updateCell(e.target)});body.addEventListener('click',e=>{const b=e.target.closest('.delete');if(!b||isLocked())return;const row=b.closest('tr');if(row.dataset.type==='income'&&mandatoryShifts.some(s=>s.id===row.dataset.id))return;state[row.dataset.type]=state[row.dataset.type].filter(r=>String(r.id)!==row.dataset.id);row.remove();recalc();save()});body.addEventListener('keydown',e=>{if(!isLocked()&&e.key==='Enter'&&e.target.matches('input')){e.preventDefault();if(e.target.dataset.field==='name'){const next=e.target.closest('tr').querySelector('.amount-input');if(next){next.focus();return}}addRow(e.target.closest('tr').dataset.type)}})}
+function addRow(type){if(isLocked())return;const r={id:'row-'+Date.now()+'-'+Math.random().toString(36).slice(2,7),name:'',kind:'regular',amount:0};state[type].push(r);const el=makeRow(type,r);$(type==='income'?'income-body':'expense-body').appendChild(el);el.querySelector('.name')?.focus();save();recalc()}
+$('lock-month').addEventListener('click',()=>{if(isLocked()){$('unlock-password').value='';$('password-error').textContent='';$('unlock-description').textContent='กรอกรหัสเพื่อปลดล็อก '+MONTH_NAMES[selectedMonth]+' พ.ศ. '+selectedYear;$('unlock-modal').classList.add('show');$('unlock-password').focus()}else{document.activeElement?.blur();state.locked=true;save();refreshLockUI()}});
+$('cancel-unlock').addEventListener('click',()=>$('unlock-modal').classList.remove('show'));
+$('unlock-modal').addEventListener('click',e=>{if(e.target===$('unlock-modal'))$('unlock-modal').classList.remove('show')});
+$('unlock-form').addEventListener('submit',e=>{e.preventDefault();if($('unlock-password').value==='1234'){state.locked=false;save();refreshLockUI();$('unlock-modal').classList.remove('show');$('unlock-password').value=''}else{$('password-error').textContent='รหัสไม่ถูกต้อง กรุณาลองใหม่';$('unlock-password').value='';$('unlock-password').focus()}});
+$('copy-previous').addEventListener('click',()=>{
+ if(isLocked())return;
+ const prev=previousPeriod(),source=store[slot(prev.year,prev.month)];
+ if(!validMonth(source)){
+  $('copy-title').textContent='ยังไม่มีข้อมูลเดือนก่อน';
+  $('copy-description').textContent='ไม่พบข้อมูลที่บันทึกไว้สำหรับ '+periodLabel(prev.year,prev.month)+' กรุณาบันทึกข้อมูลในเดือนนั้นก่อน';
+  $('confirm-copy').style.display='none';
+ }else{
+  $('copy-title').textContent='⧉ คัดลอกจากเดือนก่อน';
+  $('copy-description').textContent='นำรายได้ รายจ่าย จำนวนเวร และรายการทั้งหมดจาก '+periodLabel(prev.year,prev.month)+' มายัง '+periodLabel(selectedYear,selectedMonth)+' ใช่หรือไม่?';
+  $('confirm-copy').style.display='inline-flex';
+ }
+ $('copy-modal').classList.add('show');
+});
+$('cancel-copy').addEventListener('click',()=>$('copy-modal').classList.remove('show'));
+$('copy-modal').addEventListener('click',e=>{if(e.target===$('copy-modal'))$('copy-modal').classList.remove('show')});
+$('confirm-copy').addEventListener('click',()=>{
+ if(isLocked())return;
+ const prev=previousPeriod(),source=store[slot(prev.year,prev.month)];
+ if(!validMonth(source))return;
+ const copied=JSON.parse(JSON.stringify({income:source.income,expense:source.expense}));
+ state=ensureMandatoryShifts(copied); // ห้ามคัดลอกสถานะล็อกของเดือนต้นทาง
+ render();save();$('copy-modal').classList.remove('show');
+});
+$('add-income').addEventListener('click',()=>addRow('income'));$('add-expense').addEventListener('click',()=>addRow('expense'));
+$('reset').addEventListener('click',()=>{if(!isLocked())$('reset-modal').classList.add('show')});$('cancel-reset').addEventListener('click',()=>$('reset-modal').classList.remove('show'));$('reset-modal').addEventListener('click',e=>{if(e.target===$('reset-modal'))$('reset-modal').classList.remove('show')});$('confirm-reset').addEventListener('click',()=>{if(isLocked())return;state=emptyMonth();render();save();$('reset-modal').classList.remove('show')});
+$('export').addEventListener('click',()=>{const q=s=>'"'+String(s??'').replace(/"/g,'""')+'"';const rows=[['หมวดหมู่','รายการ','เดบิต (รายได้)','เครดิต (รายจ่าย)']];for(const r of state.income)rows.push(['รายได้',r.kind==='shift'?`${displayItemName(r)} (${money(r.qty)} × ${money(r.rate)})`:r.name,rowAmount(r).toFixed(2),'0.00']);for(const r of state.expense)rows.push(['รายจ่าย',r.name,'0.00',rowAmount(r).toFixed(2)]);const {debit,credit}=totals();rows.push(['สรุป','รวมทั้งหมด',debit.toFixed(2),credit.toFixed(2)],['สรุป','ยอดคงเหลือสุทธิ',(debit-credit).toFixed(2),'']);const data='\ufeff'+rows.map(r=>r.map(q).join(',')).join('\r\n');const url=URL.createObjectURL(new Blob([data],{type:'text/csv;charset=utf-8;'}));const a=document.createElement('a');a.href=url;a.download=`สมุดบัญชี_${selectedYear}_${String(selectedMonth+1).padStart(2,'0')}.csv`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)});
+$('year-input').addEventListener('change',e=>{const y=Number(e.target.value);if(Number.isInteger(y)&&y>=2400&&y<=2900)selectPeriod(y,selectedMonth);else e.target.value=selectedYear});
+$('prev-year').addEventListener('click',()=>selectPeriod(selectedYear-1,selectedMonth));
+$('next-year').addEventListener('click',()=>selectPeriod(selectedYear+1,selectedMonth));
+$('export-year').addEventListener('click',()=>{const q=s=>'"'+String(s??'').replace(/"/g,'""')+'"';const rows=[['ปี พ.ศ.','เดือน','รายการ','เดบิต (รายได้)','เครดิต (รายจ่าย)']];let debit=0,credit=0;MONTH_NAMES.forEach((name,i)=>{const data=store[slot(selectedYear,i)];if(!validMonth(data))return;for(const r of data.income){const v=rowAmount(r);debit+=v;rows.push([selectedYear,name,r.kind==='shift'?`${displayItemName(r,i)} (${money(r.qty)} × ${money(r.rate)})`:r.name,v.toFixed(2),'0.00'])}for(const r of data.expense){const v=rowAmount(r);credit+=v;rows.push([selectedYear,name,r.name,'0.00',v.toFixed(2)])}});rows.push([selectedYear,'รวมทั้งปี','รวมทั้งหมด',debit.toFixed(2),credit.toFixed(2)],[selectedYear,'รวมทั้งปี','ยอดคงเหลือสุทธิ',(debit-credit).toFixed(2),'']);const csv='\ufeff'+rows.map(r=>r.map(q).join(',')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));const a=document.createElement('a');a.href=url;a.download=`สมุดบัญชี_ทั้งปี_${selectedYear}.csv`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)});
+// Import existing localStorage data only when explicitly approved; avoid silent cloud overwrites.
+$('import-local').addEventListener('click',async()=>{
+ if(!currentUser||!cloudReady||!isOwner())return;
+ let data;try{data=localLegacyData()}catch(e){alert('อ่านข้อมูลเดิมไม่ได้: '+formatError(e));return}
+ const entries=Object.entries(data).filter(([k,v])=>/^\d{4}-(0[1-9]|1[0-2])$/.test(k)&&validMonth(v));
+ if(!entries.length){alert('ไม่พบข้อมูลเดิมในเบราว์เซอร์เครื่องนี้');return}
+ const conflicts=entries.filter(([k])=>validMonth(store[k])).length;
+ if(!confirm(`พบข้อมูลเดิม ${entries.length} เดือน\n${conflicts?`มี ${conflicts} เดือนที่ซ้ำกับข้อมูลคลาวด์ และจะถูกแทนที่\n`:''}ยืนยันนำเข้าขึ้นคลาวด์หรือไม่?`))return;
+ $('import-local').disabled=true;let success=0;
+ try{
+  for(const [key,value] of entries){
+   const cleanMonth=ensureMandatoryShifts(clone(value));store[key]=cleanMonth;
+   await setDoc(doc(db,'users',workspaceOwnerId,'months',key),{income:cleanMonth.income,expense:cleanMonth.expense,locked:cleanMonth.locked===true,updatedAt:serverTimestamp()});success++;
+  }
+  selectPeriod(selectedYear,selectedMonth);status('นำเข้าข้อมูลเดิมสำเร็จ '+success+' เดือน');alert('นำเข้าข้อมูลสำเร็จ '+success+' เดือน (ข้อมูลเดิมในเบราว์เซอร์ยังอยู่)');
+ }catch(e){status('นำเข้าไม่สำเร็จ: '+formatError(e),true);alert(`นำเข้าได้ ${success} เดือน ก่อนเกิดข้อผิดพลาด: ${formatError(e)}`)}
+ finally{$('import-local').disabled=false}
+});
+// Collaborative access is a Firestore authorization rule, not a browser-only flag.
+const workspaceMessage=(message,error=false)=>{const el=$('workspace-message');el.textContent=message;el.style.color=error?'#b8454b':'#176a58'};
+async function refreshMembers(){
+ const list=$('member-list');list.textContent='';
+ if(!isOwner())return;
+ try{
+  const members=await getDocs(collection(db,'workspaces',currentUser.uid,'members'));
+  if(members.empty){list.textContent='ยังไม่มีผู้ใช้ที่ได้รับอนุญาต';return}
+  members.forEach(m=>{
+   const line=document.createElement('div');line.className='member-row';
+   const value=document.createElement('span');value.textContent=m.id;
+   const remove=document.createElement('button');remove.type='button';remove.className='btn danger';remove.textContent='ถอนสิทธิ์';
+   remove.addEventListener('click',async()=>{
+    if(!confirm('ถอนสิทธิ์การเข้าถึงข้อมูลร่วมของ UID นี้?'))return;
+    try{await deleteDoc(memberDoc(currentUser.uid,m.id));workspaceMessage('ถอนสิทธิ์แล้ว');await refreshMembers()}
+    catch(e){workspaceMessage(formatError(e),true)}
+   });
+   line.append(value,remove);list.append(line);
+  });
+ }catch(e){workspaceMessage('อ่านรายชื่อสมาชิกไม่ได้: '+formatError(e),true)}
+}
+$('workspace-button').addEventListener('click',()=>{
+ if(!currentUser)return;
+ $('my-uid').textContent=currentUser.uid;
+ $('workspace-owner-id').value=workspaceOwnerId||currentUser.uid;
+ $('owner-tools').hidden=!isOwner();workspaceMessage('พื้นที่ที่ใช้งานอยู่: '+(isOwner()?'ข้อมูลของฉัน':'ข้อมูลร่วมของ '+workspaceOwnerId));
+ $('workspace-modal').classList.add('show');
+ if(isOwner())refreshMembers();
+});
+$('close-workspace').addEventListener('click',()=>$('workspace-modal').classList.remove('show'));
+$('workspace-modal').addEventListener('click',e=>{if(e.target===$('workspace-modal'))$('workspace-modal').classList.remove('show')});
+$('copy-my-uid').addEventListener('click',async()=>{
+ try{await navigator.clipboard.writeText(currentUser.uid);workspaceMessage('คัดลอก UID แล้ว')}
+ catch(e){workspaceMessage('เลือกและคัดลอก UID ด้านบนด้วยตนเอง',true)}
+});
+async function switchWorkspace(owner){
+ if(!currentUser)return;
+ owner=owner.trim();
+ if(!validUid(owner)){workspaceMessage('UID ไม่ถูกต้อง กรุณาตรวจสอบรหัส',true);return}
+ if(owner===workspaceOwnerId){workspaceMessage('กำลังใช้พื้นที่ข้อมูลนี้อยู่แล้ว');return}
+ try{
+  workspaceMessage('กำลังตรวจสอบสิทธิ์และเปิดข้อมูล...');
+  await beginRemoteSync(currentUser,owner);
+  if(workspaceOwnerId!==owner)return;
+  localStorage.setItem(WORKSPACE_PREF_KEY+currentUser.uid,owner);
+  workspaceMessage('เชื่อมต่อสำเร็จ • พื้นที่ข้อมูลของ '+owner);
+  $('owner-tools').hidden=!isOwner();
+  if(isOwner())refreshMembers();
+ }catch(e){workspaceMessage(formatError(e),true)}
+}
+$('join-workspace').addEventListener('click',()=>switchWorkspace($('workspace-owner-id').value));
+$('own-workspace').addEventListener('click',()=>switchWorkspace(currentUser.uid));
+$('add-member').addEventListener('click',async()=>{
+ if(!isOwner())return;
+ const member=$('member-uid').value.trim();
+ if(!validUid(member)||member===currentUser.uid){workspaceMessage('กรุณาระบุ UID ผู้ใช้ใหม่ให้ถูกต้อง',true);return}
+ try{
+  await setDoc(memberDoc(currentUser.uid,member),{enabled:true,addedAt:serverTimestamp()});
+  $('member-uid').value='';workspaceMessage('เพิ่มสิทธิ์แล้ว ให้ผู้ใช้นี้ใส่ UID เจ้าของเพื่อเปิดข้อมูลร่วม');
+  await refreshMembers();
+ }catch(e){workspaceMessage('ไม่สามารถอนุญาตผู้ใช้ได้: '+formatError(e),true)}
+});
+$('sign-out').addEventListener('click',async()=>{
+ // Flush queued changes before leaving the session.
+ for(const [key,timer] of pendingTimers){clearTimeout(timer);pendingTimers.delete(key);await writeMonth(key,saveVersions.get(key))}
+ try{await signOut(auth)}catch(e){alert(formatError(e))}
+});
+// Spark-only: Firebase Auth validates passwords. No custom token, proxy or Cloud Functions.
+// WARNING: Firebase Auth Email/Password public registration cannot be made admin-only on Spark.
+// Firestore Rules MUST protect salary data by owner UID + explicit membership.
+const normalizeUsername=value=>String(value??'').trim().toLowerCase();
+const usernameValid=value=>/^[a-z][a-z0-9_-]{2,23}$/.test(value);
+const internalEmail=username=>`${username}@salary-dcd6b.invalid`;
+const profileDoc=uid=>doc(db,'salaryProfiles',uid);
+const authMessage=err=>{
+ const code=err?.code||'';
+ if(code==='auth/email-already-in-use')return 'ชื่อผู้ใช้นี้ถูกจองแล้ว กรุณาเลือกชื่ออื่น';
+ if(['auth/invalid-credential','auth/user-not-found','auth/wrong-password'].includes(code))return 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง';
+ if(code==='permission-denied')return 'ไม่มีสิทธิ์เข้าถึงข้อมูล กรุณาตรวจสอบ Firestore Rules';
+ if(code==='auth/weak-password')return 'รหัสผ่านไม่ผ่านข้อกำหนดความปลอดภัยของ Firebase';
+ if(code==='auth/too-many-requests')return 'มีการลองเข้าสู่ระบบหลายครั้ง กรุณาลองใหม่ภายหลัง';
+ return err?.message||String(err);
+};
+$('auth-form').addEventListener('submit',async e=>{
+ e.preventDefault();if(!$('auth-link-panel').hidden)return;
+ $('auth-error').textContent='';$('login-button').disabled=true;
+ try{
+  const username=normalizeUsername($('auth-username').value),password=$('auth-password').value;
+  if(!usernameValid(username))throw new Error('ชื่อผู้ใช้ต้องเป็น a-z, 0-9, _ หรือ - เริ่มด้วยตัวอักษร ความยาว 3–24 ตัว');
+  await signInWithEmailAndPassword(auth,internalEmail(username),password);
+  $('auth-password').value='';
+ }catch(err){$('auth-error').textContent=authMessage(err)}
+ finally{$('login-button').disabled=false}
+});
+$('register-button').addEventListener('click',()=>{
+ $('auth-link-panel').hidden=false;
+ $('auth-form').classList.add('admin-mode');
+ $('auth-username').required=false;$('auth-password').required=false;
+ $('auth-error').textContent='';$('auth-link-email').focus();
+});
+$('cancel-link-button').addEventListener('click',()=>{
+ $('auth-link-panel').hidden=true;$('auth-form').classList.remove('admin-mode');
+ $('auth-username').required=true;$('auth-password').required=true;
+ $('auth-error').textContent='';
+});
+$('link-existing-button').addEventListener('click',async()=>{
+ const email=$('auth-link-email').value.trim(),password=$('auth-link-password').value;
+ if(!email||!password){$('auth-error').textContent='กรุณากรอกอีเมลและรหัสผ่าน Admin เดิมให้ครบ';return}
+ if(!$('auth-link-email').reportValidity()||!$('auth-link-password').reportValidity())return;
+ $('auth-error').textContent='';$('link-existing-button').disabled=true;
+ $('link-existing-button').textContent='กำลังเข้าสู่ระบบ...';
+ try{
+  await signInWithEmailAndPassword(auth,email,password);
+  $('auth-link-password').value='';
+  if(document.body.classList.contains('cloud-guard'))$('auth-error').textContent='ยืนยันตัวตนสำเร็จ กำลังโหลดข้อมูลเงินเดือนจาก Firebase...';
+ }catch(err){$('auth-error').textContent=authMessage(err)}
+ finally{$('link-existing-button').disabled=false;$('link-existing-button').textContent='Admin เข้าสู่ระบบ'}
+});
+const usersMessage=(msg,error=false)=>{const el=$('users-message');el.textContent=msg;el.style.color=error?'#b8454b':'#176a58'};
+async function showUsernameUsers(){
+ if(!isOwner())throw new Error('เมนูนี้เฉพาะ Admin เจ้าของข้อมูลเท่านั้น');
+ const snap=await getDocs(collection(db,'workspaces',currentUser.uid,'members'));
+ const list=$('username-list');list.textContent='';
+ if(snap.empty){list.textContent='ยังไม่มีสมาชิก';return}
+ snap.forEach(member=>{
+  const data=member.data(),line=document.createElement('div');line.className='member-row';
+  const name=document.createElement('span');name.textContent=(data.username||member.id)+(data.enabled===true?'':' (ปิดสิทธิ์)');
+  const btn=document.createElement('button');btn.type='button';btn.className='btn'+(data.enabled===true?' danger':'');
+  btn.textContent=data.enabled===true?'ปิดสิทธิ์':'เปิดสิทธิ์';
+  btn.addEventListener('click',async()=>{
+   if(!isOwner()||!confirm((data.enabled===true?'ปิด':'เปิด')+'สิทธิ์ '+(data.username||member.id)+'?'))return;
+   try{
+    await setDoc(memberDoc(currentUser.uid,member.id),{enabled:data.enabled!==true,username:data.username||'',updatedAt:serverTimestamp()},{merge:true});
+    usersMessage('อัปเดตสิทธิ์แล้ว');await showUsernameUsers();
+   }catch(err){usersMessage(authMessage(err),true)}
+  });
+  // On Spark, an Admin client cannot delete another Firebase Auth account.
+  // Remove Firestore access immediately instead; keep the Auth identity intact.
+  const remove=document.createElement('button');remove.type='button';remove.className='btn danger';
+  remove.textContent='ลบ User';
+  remove.setAttribute('aria-label','ลบผู้ใช้ '+(data.username||member.id)+' ออกจากระบบเงินเดือน');
+  remove.addEventListener('click',async()=>{
+   if(!isOwner()||member.id===currentUser.uid)return;
+   const username=data.username||member.id;
+   if(!confirm('ลบ User "'+username+'" ออกจากระบบเงินเดือน?\n\nผู้ใช้นี้จะหมดสิทธิ์เข้าถึงข้อมูลร่วมทันที แต่บัญชี Firebase Authentication ยังอยู่ และชื่อผู้ใช้นี้จะยังนำกลับมาสมัครใหม่ไม่ได้จนกว่าจะลบบัญชี Auth ผ่าน Firebase Console'))return;
+   remove.disabled=true;
+   try{
+    await deleteDoc(memberDoc(currentUser.uid,member.id));
+    usersMessage('ลบ '+username+' ออกจากสิทธิ์เข้าถึงข้อมูลเงินเดือนแล้ว (บัญชี Firebase Authentication ยังอยู่)');
+    await showUsernameUsers();
+   }catch(err){usersMessage('ลบสิทธิ์ไม่สำเร็จ: '+authMessage(err),true);remove.disabled=false}
+  });
+  const controls=document.createElement('div');controls.className='member-controls';controls.append(btn,remove);
+  line.append(name,controls);list.append(line);
+ });
+}
+$('user-admin-button').addEventListener('click',async()=>{
+ if(!isOwner())return;
+ $('users-modal').classList.add('show');usersMessage('');
+ try{await showUsernameUsers()}catch(err){usersMessage(authMessage(err),true)}
+});
+$('close-users').addEventListener('click',()=>$('users-modal').classList.remove('show'));
+$('users-modal').addEventListener('click',e=>{if(e.target===$('users-modal'))$('users-modal').classList.remove('show')});
+$('create-member').addEventListener('click',async()=>{
+ if(!isOwner()){usersMessage('เฉพาะ Admin เท่านั้น',true);return}
+ const username=normalizeUsername($('new-username').value),password=$('new-password').value;
+ if(!usernameValid(username)||password.length<6){usersMessage('ชื่อผู้ใช้ต้องเป็น a-z, 0-9, _ หรือ - เริ่มด้วยตัวอักษร 3–24 ตัว และรหัสผ่านอย่างน้อย 6 ตัว',true);return}
+ $('create-member').disabled=true;
+ let secondaryApp=null,secondaryAuth=null,newUser=null;
+ try{
+  // Separate app/auth session keeps Admin signed in while creating a new Auth user.
+  secondaryApp=initializeApp(firebaseConfig,'salary-member-provision-'+Date.now());
+  secondaryAuth=getAuth(secondaryApp);
+  const credential=await createUserWithEmailAndPassword(secondaryAuth,internalEmail(username),password);
+  newUser=credential.user;
+  const batch=writeBatch(db),owner=currentUser.uid;
+  batch.set(memberDoc(owner,newUser.uid),{username,enabled:true,addedAt:serverTimestamp(),updatedAt:serverTimestamp()});
+  batch.set(profileDoc(newUser.uid),{ownerUid:owner,username,createdAt:serverTimestamp()});
+  await batch.commit();
+  $('new-username').value='';$('new-password').value='';
+  usersMessage('สร้าง '+username+' สำเร็จ • ใช้ Username + Password เข้าสู่ระบบได้');
+  await showUsernameUsers();
+ }catch(err){
+  // Best effort cleanup for orphaned account if Firestore membership creation failed.
+  if(newUser){try{await deleteUser(newUser)}catch(cleanupError){usersMessage('สร้างบัญชี Auth แล้ว แต่บันทึกสิทธิ์ไม่สำเร็จ โปรดตรวจ Firebase Authentication ก่อนลองอีกครั้ง: '+authMessage(err),true);return}}
+  usersMessage(authMessage(err),true);
+ }finally{
+  if(secondaryAuth){try{await signOut(secondaryAuth)}catch(e){}}
+  if(secondaryApp){try{await deleteApp(secondaryApp)}catch(e){}}
+  $('create-member').disabled=false;
+ }
+});
+// If a remote update arrived while an input was focused, refresh after editing finishes.
+for(const body of [$('income-body'),$('expense-body')]){
+ body.addEventListener('focusout',()=>setTimeout(()=>{
+  if(cloudReady&&!dirtySlots.has(currentSlot())&&!document.activeElement?.closest?.('.data-row')){
+   state=ensureMandatoryShifts(validMonth(store[currentSlot()])?clone(store[currentSlot()]):emptyMonth());render();
+  }
+ },0));
+}
+window.addEventListener('online',()=>{if(currentUser)status('ออนไลน์ • กำลังซิงก์...')});
+window.addEventListener('offline',()=>{if(currentUser)status('ออฟไลน์ • ข้อมูลที่ยังไม่ส่งจะรอการเชื่อมต่อ')});
+try{
+ if(Object.values(firebaseConfig).some(v=>v.startsWith('REPLACE_WITH_'))){
+  $('auth-error').textContent='ยังไม่ได้ตั้งค่า Firebase กรุณาใส่ firebaseConfig ในไฟล์ HTML';
+ }else{
+  const app=initializeApp(firebaseConfig);auth=getAuth(app);db=getFirestore(app);
+  onAuthStateChanged(auth,async user=>{
+   if(user){
+    currentUser=user;
+    try{
+     const internal=user.email?.toLowerCase().endsWith('@salary-dcd6b.invalid');
+     if(internal){
+      // Unlike an Auth account, a profile can only be created by Admin per Rules.
+      const profile=await getDoc(profileDoc(user.uid));
+      if(!profile.exists()||!validUid(profile.data().ownerUid)||profile.data().username!==normalizeUsername(user.email.split('@')[0]))throw new Error('บัญชีนี้ยังไม่ได้รับการอนุญาตจาก Admin');
+      await beginRemoteSync(user,profile.data().ownerUid);
+      $('cloud-user').textContent=profile.data().username+' • สมาชิก';
+     }else{
+      // Existing original Firebase email account owns users/{UID}/months.
+      await beginRemoteSync(user,user.uid);
+      $('cloud-user').textContent='Admin';
+     }
+    }catch(err){
+     $('auth-error').textContent='เข้าสู่ระบบไม่ได้: '+authMessage(err);
+     disableApp();
+     try{await signOut(auth)}catch(e){}
+    }
+   }else{
+    if(unsubscribeMonths){unsubscribeMonths();unsubscribeMonths=null}
+    cancelQueuedSaves();currentUser=null;workspaceOwnerId=null;store={};state=emptyMonth();$('cloud-user').textContent='';$('workspace-modal').classList.remove('show');$('users-modal').classList.remove('show');$('user-admin-button').hidden=true;
+    disableApp();$('auth-password').value='';
+   }
+  },err=>{$('auth-error').textContent=formatError(err);disableApp()});
+ }
+}catch(err){$('auth-error').textContent='ตั้งค่า Firebase ไม่สำเร็จ: '+formatError(err)}
+selectPeriod(selectedYear,selectedMonth);
+})();
+</script></body></html>
